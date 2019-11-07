@@ -27,7 +27,10 @@ Task 2: improving quicksort
 Do the following changes affect the complexity of quicksort on any kind of
 input data? If so, what is it that changes?
 
-  Shuffling the array first: [no] [yes+reason]
+  Shuffling the array first:
+  Yes it affects the complexity. It goes a little bit slower on completely random, but an insignificant amount.
+  For 95% sorted it goes a little bit faster but only an insignificant amount.
+  For sorted input it goes much faster, it goes from n^2 before the change to n lg n after the change.
 
   Median-of-three pivot selection: [no] [yes+reason]
 
