@@ -1,3 +1,5 @@
+package lab1;
+
 /**
  *  The {@code Insertion} class provides static final methods for sorting an
  *  array using insertion sort.

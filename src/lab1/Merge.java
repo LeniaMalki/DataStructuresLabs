@@ -1,3 +1,5 @@
+package lab1;
+
 /**
  *  The {@code Merge} class provides static final methods for sorting an
  *  array using mergesort.

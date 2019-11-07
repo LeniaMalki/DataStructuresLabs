@@ -1,4 +1,4 @@
-//
+package lab1;//
 // HERE BE DRAGONS!
 //
 // You don't have to read any of this file.

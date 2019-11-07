@@ -1,4 +1,4 @@
-/**
+package lab1; /**
  *  The {@code Quick} class provides static methods for sorting an
  *  array and selecting the ith smallest element in an array using quicksort.
  *  <p>

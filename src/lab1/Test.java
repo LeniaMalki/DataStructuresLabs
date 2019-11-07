@@ -1,4 +1,4 @@
-// Tests a sorting algorithm.
+package lab1;// Tests a sorting algorithm.
 // By default, tests Quick.java.
 // If you want to test a different algorithm, see the comment inside
 // the 'main' method below.
