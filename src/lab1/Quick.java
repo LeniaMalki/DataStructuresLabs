@@ -23,21 +23,22 @@ public class Quick {
     }
 
     // quicksort the subarray from a[lo] to a[hi]
-    public static void sort(int[] a, int lo, int hi) { 
-        // To do: try switching to insertion sort if a[lo..hi] is small.
+    public static void sort(int[] a, int lo, int hi) {
         if (hi <= lo) return;
 
-        int j = partition(a, lo, hi);
-        sort(a, lo, j-1);
-        sort(a, j+1, hi);
+        if(hi-lo>100) {
+            int j = partition(a, lo, hi);
+            sort(a, lo, j-1);
+            sort(a, j+1, hi);
+        } else {
+            Insertion.sort(a, lo, hi);
+        }
         assert isSorted(a, lo, hi);
     }
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
     private static int partition(int[] a, int lo, int hi) {
-        // To do: find the median of the first, last and middle
-        // elements of a[lo..hi], and swap that index with a[lo].
         int median = median3(a, lo, (hi-lo)/2+lo,hi);
         exch(a, median, lo);
 
