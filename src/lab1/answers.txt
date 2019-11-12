@@ -28,16 +28,23 @@ Do the following changes affect the complexity of quicksort on any kind of
 input data? If so, what is it that changes?
 
   Shuffling the array first:
-  Yes it affects the complexity. It goes a little bit slower on completely random, but an insignificant amount.
-  For 95% sorted it goes a little bit faster but only an insignificant amount.
-  For sorted input it goes much faster, it goes from n^2 before the change to n lg n after the change.
+  No. It goes a little bit slower on completely random, but an insignificant amount.
+  No. For 95% sorted it goes a little bit faster but only an insignificant amount.
+  Yes. For sorted input it goes much faster, it goes from n^2 before the change to n lg n after the change.
 
   Median-of-three pivot selection:
-  Yes but hardly noticeable. It gives a better pivot but we can only see any difference on really big N sizes.
+  No. For random its barely noticeable, but it is a little bit slower.
+  No. For 95% sorted its a little bit faster. More noticeable. But still n log n.
+  Yes. It is a lot faster for the sorted list. This looks like O(n) from O(n^2)
 
-  Insertion sort for small arrays: [no] [yes+reason]
+  Insertion sort for small arrays:
+  No. For random its faster. But still n log n.
+  No. Faster but still n log n.
+  No. Faster but still n^2
+
   
 Which combination of improvements gives the best result?
-If you use insertion sort for small arrays, say what cutoff you used.
-
-[...answer here...]
+Insertion + Median gives the best result.
+Median and Shuffle both make sorted faster. But shuffle makes the rest slower. While median only makes random a little bit slower.
+Insertion uses 100 as cutoff. We tested from 300 as it was clear from the data it was good and then we moved between 50 and 300 until we found a good value.
+Around 90-100 it was kind of the same improvement.
