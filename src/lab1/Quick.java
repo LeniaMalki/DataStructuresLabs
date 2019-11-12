@@ -38,6 +38,8 @@ public class Quick {
     private static int partition(int[] a, int lo, int hi) {
         // To do: find the median of the first, last and middle
         // elements of a[lo..hi], and swap that index with a[lo].
+        int median = median3(a, lo, (hi-lo)/2+lo,hi);
+        exch(a, median, lo);
 
         int i = lo;
         int j = hi + 1;
