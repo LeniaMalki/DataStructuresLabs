@@ -32,7 +32,8 @@ input data? If so, what is it that changes?
   For 95% sorted it goes a little bit faster but only an insignificant amount.
   For sorted input it goes much faster, it goes from n^2 before the change to n lg n after the change.
 
-  Median-of-three pivot selection: [no] [yes+reason]
+  Median-of-three pivot selection:
+  Yes but hardly noticeable. It gives a better pivot but we can only see any difference on really big N sizes.
 
   Insertion sort for small arrays: [no] [yes+reason]
   
