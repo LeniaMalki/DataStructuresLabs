@@ -1,3 +1,5 @@
+Resubmit: We changed Merge sort complexity from n to n log n and median of three to n log n
+
 Task 1: figuring out the complexity
 -----------------------------------
 
@@ -12,9 +14,9 @@ Quick.java on:
   sorted inputs: n^2
 
 Merge.java on:
-  random inputs: n lg n (maybe n)
-  95% sorted inputs: n
-  sorted inputs: n
+  random inputs: n lg n
+  95% sorted inputs: n log n
+  sorted inputs: n log n
 
 Arrays.sort on:
   random inputs: n lg n
@@ -35,7 +37,7 @@ input data? If so, what is it that changes?
   Median-of-three pivot selection:
   No. For random its barely noticeable, but it is a little bit slower.
   No. For 95% sorted its a little bit faster. More noticeable. But still n log n.
-  Yes. It is a lot faster for the sorted list. This looks like O(n) from O(n^2)
+  Yes. It is a lot faster for the sorted list. This looks like O(n log n) from O(n^2)
 
   Insertion sort for small arrays:
   No. For random its faster. But still n log n.
