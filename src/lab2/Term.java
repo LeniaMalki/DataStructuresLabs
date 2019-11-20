@@ -3,29 +3,64 @@ package lab2;
 import java.util.Comparator;
 
 public class Term {
-    // Initializes a term with the given query string and weight.
-    public Term(String query, long weight)
+    private String query;
+    private long weight;
 
-    // Compares the two terms in lexicographic order by query.
-    public static Comparator<Term> byLexicographicOrder()
+
+    public Term(String query, long weight) {
+        if(query==null) {
+            throw new NullPointerException("Query can't be null");
+        }
+        if(weight<0) {
+            throw new IllegalArgumentException("Weight can't be negative");
+        }
+        this.query=query;
+        this.weight=weight;
+    }
+
+    // Compares the two terms in lexicographic order by query. O(C+2N+C+C)
+    public static Comparator<Term> byLexicographicOrder() {
+        return new Comparator<Term>() {
+            @Override
+            public int compare(Term o1, Term o2) {
+                int length = Math.min(o1.query.length(), o2.query.length());
+
+                for(int i = 0; i<length; i++) {
+                    if (o1.query.charAt(i)<o2.query.charAt(i)) {
+                        return -1;
+                    } else if(o1.query.charAt(i)>o2.query.charAt(i)) {
+                        return 1;
+                    }
+                }
+                if(o1.query.length()<o2.query.length()) {
+                    return -1;
+                } else if (o1.query.length()>o2.query.length()) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+    }
 
     // Compares the two terms in descending order by weight.
-    public static Comparator<Term> byReverseWeightOrder()
+    public static Comparator<Term> byReverseWeightOrder() {
+        return null;
+    }
 
     // Compares the two terms in lexicographic order,
     // but using only the first k characters of each query.
-    public static Comparator<Term> byPrefixOrder(int k)
+    public static Comparator<Term> byPrefixOrder(int k) {
+        if(k<0) {
+            throw new IllegalArgumentException("The first K characters can't be negative");
+        }
+        return null;
+    }
 
     // Returns a string representation of this term in the following format:
     // the weight, followed by whitespace, followed by the query.
     public String toString() {
         return String.format("%12d    %s", this.weight, this.query);
     }
-
-    //Corner cases
-    //
-    //    The constructor should throw a java.lang.NullPointerException if query is null and a java.lang.IllegalArgumentException if weight is negative.
-    //    The byPrefixOrder() method should throw a java.lang.IllegalArgumentException if k is negative.
 
     //Performance requirements
     //
