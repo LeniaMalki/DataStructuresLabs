@@ -21,7 +21,7 @@ public class PostFixExpressions {
                 }else if (input.equals(".")) {
                     System.out.println(stack.pop());
                 } else if (input.equals("print")){
-                    printStack(stack3);
+                    printStack(stack);
                 }
                 else {
                     addtoStack(input);
