@@ -1,6 +1,6 @@
 package lab2;
 
-import java.util.Comparator;
+import java.util.*;
 
 public class Term {
     private String query;
@@ -23,28 +23,24 @@ public class Term {
         return new Comparator<Term>() {
             @Override
             public int compare(Term o1, Term o2) {
-                int length = Math.min(o1.query.length(), o2.query.length());
-
-                for(int i = 0; i<length; i++) {
-                    if (o1.query.charAt(i)<o2.query.charAt(i)) {
-                        return -1;
-                    } else if(o1.query.charAt(i)>o2.query.charAt(i)) {
-                        return 1;
-                    }
-                }
-                if(o1.query.length()<o2.query.length()) {
-                    return -1;
-                } else if (o1.query.length()>o2.query.length()) {
-                    return 1;
-                }
-                return 0;
+                return limimtedLexiCompare(o1, o2, Math.max(o1.query.length(), o2.query.length()));
             }
         };
     }
 
     // Compares the two terms in descending order by weight.
     public static Comparator<Term> byReverseWeightOrder() {
-        return null;
+        return new Comparator<Term>() {
+            @Override
+            public int compare(Term o1, Term o2) {
+                if (o1.weight<o2.weight){
+                    return 1;
+                }else if (o1.weight>o2.weight){
+                    return -1;
+                }
+                return 0;
+            }
+        };
     }
 
     // Compares the two terms in lexicographic order,
@@ -53,7 +49,39 @@ public class Term {
         if(k<0) {
             throw new IllegalArgumentException("The first K characters can't be negative");
         }
-        return null;
+        return new Comparator<Term>() {
+            @Override
+            public int compare(Term o1, Term o2) {
+                return limimtedLexiCompare(o1, o2, k);
+            }
+        };
+    }
+
+    /**
+     * @param o1 Term 1
+     * @param o2 Term 2
+     * @param k  if exists this should be the limit of how much of the Term should be compared
+     * @return negative if o1 comes before o2, 0 if they are equal within the limit, positive if o1 comes after o2
+     */
+    private static int limimtedLexiCompare(Term o1, Term o2, int k){
+        int length = Math.min(o1.query.length(), o2.query.length());
+
+        for(int i = 0; i<length; i++) {
+            if (i>k){
+                return 0;
+            }
+            if (o1.query.charAt(i)<o2.query.charAt(i)) {
+                return -1;
+            } else if(o1.query.charAt(i)>o2.query.charAt(i)) {
+                return 1;
+            }
+        }
+        if(o1.query.length()<o2.query.length()) {
+            return -1;
+        } else if (o1.query.length()>o2.query.length()) {
+            return 1;
+        }
+        return 0;
     }
 
     // Returns a string representation of this term in the following format:
