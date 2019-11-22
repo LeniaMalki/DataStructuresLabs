@@ -6,6 +6,9 @@ public class RangeBinarySearch {
     // Returns the index of the first key in a[] that equals the search key, or -1 if no such key.
     // Complexity: O(log N), where N is the length of the array
     public static <Key> int firstIndexOf(Key[] a, Key key, Comparator comparator){
+        if(a==null || key==null || comparator==null) {
+            throw new NullPointerException("BinarySearch arguments can't be null");
+        }
         int index = 0;
         int lo = 0;
         int high = a.length-1;
@@ -38,6 +41,9 @@ public class RangeBinarySearch {
     // Returns the index of the last key in a[] that equals the search key, or -1 if no such key.
     // Complexity: O(log N)
     public static <Key> int lastIndexOf(Key[] a, Key key, Comparator comparator){
+        if(a==null || key==null || comparator==null) {
+            throw new NullPointerException("BinarySearch arguments can't be null");
+        }
         int index = -1;
         int lo = 0;
         int high = a.length-1;
@@ -65,12 +71,7 @@ public class RangeBinarySearch {
         }
         return index;
     }
-
-
-    //Corner cases
-    //
-    //    Each static method should throw a java.lang.NullPointerException if any of its arguments is null.
-    //    You should assume that the argument array is in sorted order (with respect to the supplied comparator).
+    
 
     //Performance requirements
     //
