@@ -49,7 +49,7 @@ allMatches():   O(log N + M log M)
 
 numberOfMatches():   O(log N)
 
-[short explanation]
+We are not sure about this one
 
 
 
