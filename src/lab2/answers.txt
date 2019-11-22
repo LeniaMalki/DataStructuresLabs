@@ -5,17 +5,17 @@
  *  Lab 2: Autocomplete
  ******************************************************************************/
 
-Name of lab group: [...]
-Group member A:    [...]
-Group member B:    [...]
+Name of lab group: 67
+Group member A:    Viktor Fredholm
+Group member B:    Johannes Mattsson
 
 
 /******************************************************************************
  *  How many hours did you spend on the assignment?
  *****************************************************************************/
 
-Group member A:    [...]
-Group member B:    [...]
+Group member A:
+Group member B:    4
 
 
 /******************************************************************************
@@ -36,17 +36,18 @@ Group member B:    [...]
  *  and lower-order terms, e.g., m^2 + m log n.
  *****************************************************************************/
 
-constructor:  [...]
+constructor:  n log n
 
-[short explanation]
-
-
-allMatches():   [...]
-
-[short explanation]
+The copy goes over n terms and the arrays.sort takes n log n time resulting in O(n+n log n) giving us O(n log n). It is not affected by matching terms.
 
 
-numberOfMatches():   [...]
+allMatches():   O(log N + M log M)
+
+ O(log N) for find firstindex,  O(log N) for find last index, if all terms match we will create an array of M length that takes M log M time to sort.
+ Giving us O(log N + log N + M log M) complexity
+
+
+numberOfMatches():   O(log N)
 
 [short explanation]
 
@@ -56,7 +57,7 @@ numberOfMatches():   [...]
  *  Are there any known bugs / limitations?
  *****************************************************************************/
 
-
+We could'nt get the AutocompleteCLI to run
 
 
 /******************************************************************************
@@ -66,14 +67,14 @@ numberOfMatches():   [...]
  *  may have used in creating your design.
  *****************************************************************************/
 
-
+Lecture slides, lectures
 
 
 /******************************************************************************
  *  Describe any serious problems you encountered.                    
  *****************************************************************************/
 
-
+We could'nt get the AutocompleteCLI to run
 
 
 /******************************************************************************
@@ -83,5 +84,5 @@ numberOfMatches():   [...]
  *****************************************************************************/
 
 
-
+This was interesting
   
