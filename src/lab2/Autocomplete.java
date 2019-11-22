@@ -1,6 +1,9 @@
 package lab2;
+import java.util.Arrays;
 
 public class Autocomplete {
+    public Term[] terms;
+
     // Initializes the data structure from the given array of terms.
     // Complexity: O(N log N), where N is the number of terms
     public Autocomplete(Term[] terms) {
@@ -8,6 +11,8 @@ public class Autocomplete {
             throw new NullPointerException("Terms can't be null");
         }
 
+        this.terms = terms.clone();
+        Arrays.sort(this.terms);
     }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
@@ -16,9 +21,22 @@ public class Autocomplete {
         if(prefix==null) {
             throw new NullPointerException("Terms can't be null");
         }
-        
 
-        return null;
+        int firstIndex = lab2.RangeBinarySearch.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        if (firstIndex == -1) { //If there is no match return
+            return new Term[0];
+        }
+
+        int lastIndex  = lab2.RangeBinarySearch.lastIndexOf (terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        Term[] terms = new Term[lastIndex - firstIndex + 1];
+
+        for (int i = 0; i < terms.length; i++) {
+            terms[i] = this.terms[firstIndex++];
+        }
+
+        Arrays.sort(terms, lab2.Term.byReverseWeightOrder());
+
+        return terms;
     }
 
     // Returns the number of terms that start with the given prefix.
