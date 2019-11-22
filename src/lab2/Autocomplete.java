@@ -3,21 +3,34 @@ package lab2;
 public class Autocomplete {
     // Initializes the data structure from the given array of terms.
     // Complexity: O(N log N), where N is the number of terms
-    public Autocomplete(Term[] terms)
+    public Autocomplete(Term[] terms) {
+        if(terms==null) {
+            throw new NullPointerException("Terms can't be null");
+        }
+
+    }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
     // Complexity: O(log N + M log M), where M is the number of matching terms
-    public Term[] allMatches(String prefix)
+    public Term[] allMatches(String prefix) {
+        if(prefix==null) {
+            throw new NullPointerException("Terms can't be null");
+        }
+        
+
+        return null;
+    }
 
     // Returns the number of terms that start with the given prefix.
     // Complexity: O(log N)
-    public int numberOfMatches(String prefix)
+    public int numberOfMatches(String prefix) {
+        if(prefix==null) {
+            throw new NullPointerException("Terms can't be null");
+        }
 
-    //Corner cases
-    //
-    //The constructor should throw a java.lang.NullPointerException if its argument is null or if any of the entries in its argument array are null.
-    //Each method should throw a java.lang.NullPointerException if its argument is null.
-    //
+        return allMatches(prefix).length;
+    }
+
     //Performance requirements
     //
     //The constructor should make proportional to N log N compares (or better) in the worst case, where N is the number of terms.
