@@ -14,7 +14,7 @@ Group member B:    Johannes Mattsson
  *  How many hours did you spend on the assignment?
  *****************************************************************************/
 
-Group member A:
+Group member A:    4
 Group member B:    4
 
 
@@ -22,9 +22,10 @@ Group member B:    4
  *  Describe how your firstIndexOf() method in RangeBinarySearch.java
  *  finds the first index of a key that equals the search key.
  *****************************************************************************/
+The search loop looks at the middle element of a given range like a binary search.
+When it finds a matching value it checks the element before to see if it is the first one, otherwise continuing with the search as usual.
 
-
-
+this gives the complexity of at most 2*log n if the whole search tree contains the wanted element.
 
 /******************************************************************************
  *  What is the worst case time complexity in the number of compares
@@ -85,4 +86,7 @@ We could'nt get the AutocompleteCLI to run
 
 
 This was interesting
-  
+
+The assignment was really confusing to get into and to understand what had to be done to make it work,
+and I'm not sure if it's because all the tasks were too open ended or just unclear what should have been done.
+A major contributor was perhaps the given methods and the lack of explanation on what they were supposed to do.
