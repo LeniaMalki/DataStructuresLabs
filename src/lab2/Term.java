@@ -81,7 +81,7 @@ public class Term {
                 return 1;
             }
         }
-        return o2.query.compareTo(o1.query);
+        return 0;//o2.query.compareTo(o1.query);
     }
 
     // Returns a string representation of this term in the following format:
