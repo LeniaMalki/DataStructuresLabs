@@ -12,7 +12,7 @@ public class Autocomplete {
         }
 
         this.terms = terms.clone();
-        Arrays.sort(this.terms);
+        Arrays.sort(this.terms, Term.byReverseWeightOrder());
     }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
