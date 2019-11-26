@@ -17,7 +17,7 @@ public class RangeBinarySearch {
 
             mid = (high-lo)/2 + lo;
             //System.out.println("High: " + high +" Mid: " + mid +" Low: " + lo);
-            int val = comparator.compare(a[mid], key);
+            int val = comparator.compare(key, a[mid]);
 
             if (val<0) {
                 lo = mid+1;
