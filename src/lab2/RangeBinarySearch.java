@@ -45,13 +45,12 @@ public class RangeBinarySearch {
         if(a==null || key==null || comparator==null) {
             throw new NullPointerException("BinarySearch arguments can't be null");
         }
-        int index = -1;
+
         int lo = 0;
         int high = a.length-1;
-        int mid = (high-lo)/2 + lo;
+        int mid;
 
-        while (mid == (high-lo)/2 + lo){
-
+        while (high>=lo){
             mid = (high-lo)/2;
             int val = comparator.compare(a[mid], key);
 
@@ -61,19 +60,17 @@ public class RangeBinarySearch {
                 high = mid;
             } else {
                 if (mid == a.length-1){
-                    index = mid;
-                    break;
+                    return mid;
                 }
                 //if the element before a[mid] is different from a[mid] break the loop and return index
                 if (comparator.compare(a[mid], a[mid + 1]) != 0) {
-                    index = mid;
-                    break;
+                    return mid;
                 } else {
                     lo = mid;
                 }
             }
         }
-        return index;
+        return -1;
     }
     
 
