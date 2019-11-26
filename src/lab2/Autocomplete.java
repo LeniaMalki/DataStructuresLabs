@@ -22,21 +22,21 @@ public class Autocomplete {
             throw new NullPointerException("Terms can't be null");
         }
 
-        int firstIndex = lab2.RangeBinarySearch.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        int firstIndex = RangeBinarySearch.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         System.out.println(firstIndex);
         if (firstIndex == -1) { //If there is no match return
             return new Term[0];
         }
         System.out.println("works?");
 
-        int lastIndex  = lab2.RangeBinarySearch.lastIndexOf (this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        int lastIndex  = RangeBinarySearch.lastIndexOf (this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         Term[] terms = new Term[lastIndex - firstIndex + 1];
 
         for (int i = 0; i < terms.length; i++) {
             terms[i] = this.terms[firstIndex++];
         }
 
-        Arrays.sort(terms, lab2.Term.byReverseWeightOrder());
+        Arrays.sort(terms, Term.byReverseWeightOrder());
 
         return terms;
     }
