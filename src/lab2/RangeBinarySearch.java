@@ -51,13 +51,13 @@ public class RangeBinarySearch {
         int mid;
 
         while (high>=lo){
-            mid = (high-lo)/2;
-            int val = comparator.compare(a[mid], key);
+            mid = (high-lo)/2 + lo;
+            int val = comparator.compare(key,a[mid]);
 
             if (val<0) {
-                lo = mid;
+                lo = mid+1;
             } else if (val > 0){
-                high = mid;
+                high = mid-1;
             } else {
                 if (mid == a.length-1){
                     return mid;
@@ -66,7 +66,7 @@ public class RangeBinarySearch {
                 if (comparator.compare(a[mid], a[mid + 1]) != 0) {
                     return mid;
                 } else {
-                    lo = mid;
+                    lo = mid+1;
                 }
             }
         }
