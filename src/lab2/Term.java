@@ -23,7 +23,7 @@ public class Term {
         return new Comparator<Term>() {
             @Override
             public int compare(Term o1, Term o2) {
-                return limimtedLexiCompare(o1, o2, Math.max(o1.query.length(), o2.query.length()));
+                return limitedLexiCompare(o1, o2, Math.max(o1.query.length(), o2.query.length()));
             }
         };
     }
@@ -52,7 +52,7 @@ public class Term {
         return new Comparator<Term>() {
             @Override
             public int compare(Term o1, Term o2) {
-                return limimtedLexiCompare(o1, o2, k);
+                return limitedLexiCompare(o1, o2, k);
             }
         };
     }
@@ -63,7 +63,7 @@ public class Term {
      * @param k  if exists this should be the limit of how much of the Term should be compared
      * @return negative if o1 comes before o2, 0 if they are equal within the limit, positive if o1 comes after o2
      */
-    private static int limimtedLexiCompare(Term o1, Term o2, int k){
+    private static int limitedLexiCompare(Term o1, Term o2, int k){
         int length = Math.min(o1.query.length(), o2.query.length());
 
         for(int i = 0; i<length; i++) {
