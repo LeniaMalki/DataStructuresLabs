@@ -9,33 +9,34 @@ public class RangeBinarySearch {
         if(a==null || key==null || comparator==null) {
             throw new NullPointerException("BinarySearch arguments can't be null");
         }
-        int index = 0;
         int lo = 0;
         int high = a.length-1;
         int mid;
 
-        while (true){
-            mid = (high-lo)/2;
+        while (high>=lo){
+
+            mid = (high-lo)/2 + lo;
+            //System.out.println("High: " + high +" Mid: " + mid +" Low: " + lo);
             int val = comparator.compare(a[mid], key);
 
             if (val<0) {
-                lo = mid;
+                lo = mid+1;
             } else if (val > 0){
-                high = mid;
+                high = mid-1;
             } else {
                 if (mid == 0){
-                    break;
+                    return mid;
                 }
                 //if the element before a[mid] is different from a[mid] break the loop and return index
                 if (comparator.compare(a[mid], a[mid - 1]) != 0) {
-                    break;
+                    return mid;
                 } else {
-                    high = mid;
+                    high = mid-1;
                 }
             }
         }
 
-        return index;
+        return -1;
     }
 
     // Returns the index of the last key in a[] that equals the search key, or -1 if no such key.
@@ -47,9 +48,10 @@ public class RangeBinarySearch {
         int index = -1;
         int lo = 0;
         int high = a.length-1;
-        int mid;
+        int mid = (high-lo)/2 + lo;
 
-        while (true){
+        while (mid == (high-lo)/2 + lo){
+
             mid = (high-lo)/2;
             int val = comparator.compare(a[mid], key);
 
@@ -59,10 +61,12 @@ public class RangeBinarySearch {
                 high = mid;
             } else {
                 if (mid == a.length-1){
+                    index = mid;
                     break;
                 }
                 //if the element before a[mid] is different from a[mid] break the loop and return index
                 if (comparator.compare(a[mid], a[mid + 1]) != 0) {
+                    index = mid;
                     break;
                 } else {
                     lo = mid;
