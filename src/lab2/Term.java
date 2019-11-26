@@ -76,12 +76,7 @@ public class Term {
                 return 1;
             }
         }
-        if(o1.query.length()<o2.query.length()) {
-            return -1;
-        } else if (o1.query.length()>o2.query.length()) {
-            return 1;
-        }
-        return 0;
+        return o2.query.compareTo(o1.query);
     }
 
     // Returns a string representation of this term in the following format:
