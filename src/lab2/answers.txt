@@ -48,9 +48,9 @@ allMatches():   O(log N + M log M)
  Giving us O(log N + log N + M log M) complexity
 
 
-numberOfMatches():   O(log N)
+numberOfMatches():   O(log N + M log M)
 
-We are not sure about this one
+Right now it matches complexity allMatches() as it has to run that function to find a solution. A better way could be to leverage BinarySearch directly.
 
 
 
@@ -75,7 +75,7 @@ Lecture slides, lectures
  *  Describe any serious problems you encountered.                    
  *****************************************************************************/
 
-We could'nt get the AutocompleteCLI to run
+We could get the client to work after trying some more and found more problems in our code. But at first we couldn't get it to work.
 
 
 /******************************************************************************
@@ -88,5 +88,5 @@ We could'nt get the AutocompleteCLI to run
 This was interesting
 
 The assignment was really confusing to get into and to understand what had to be done to make it work,
-and I'm not sure if it's because all the tasks were too open ended or just unclear what should have been done.
+and we are not sure if it's because all the tasks were too open ended or just unclear what should have been done.
 A major contributor was perhaps the given methods and the lack of explanation on what they were supposed to do.
