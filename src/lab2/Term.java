@@ -66,6 +66,11 @@ public class Term {
     private static int limitedLexiCompare(Term o1, Term o2, int k){
         int length = Math.min(o1.query.length(), o2.query.length());
 
+
+        System.out.println("term 1"+ o1);
+
+        System.out.println("term 2"+ o2);
+
         for(int i = 0; i<length; i++) {
             if (i>k){
                 return 0;
