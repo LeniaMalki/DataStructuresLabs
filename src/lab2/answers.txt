@@ -48,10 +48,9 @@ allMatches():   O(log N + M log M)
  Giving us O(log N + log N + M log M) complexity
 
 
-numberOfMatches():   O(log N + M log M)
+numberOfMatches():   O(log N)
 
-Right now it matches complexity allMatches() as it has to run that function to find a solution. A better way could be to leverage BinarySearch directly.
-
+We improved it to use binary search directly giving us log n + log n for complexity. Which gives us O(log N) in complexity
 
 
 /******************************************************************************
