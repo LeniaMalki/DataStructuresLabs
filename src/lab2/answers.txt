@@ -57,7 +57,7 @@ We improved it to use binary search directly giving us log n + log n for complex
  *  Are there any known bugs / limitations?
  *****************************************************************************/
 
-We could'nt get the AutocompleteCLI to run
+We could'nt get the AutocompleteCLI to run at first. Now everything should work.
 
 
 /******************************************************************************
