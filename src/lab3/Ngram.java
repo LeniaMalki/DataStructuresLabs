@@ -1,3 +1,5 @@
+package lab3;
+
 import java.util.stream.*;
 
 // A class representing an n-gram.

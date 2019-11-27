@@ -1,3 +1,5 @@
+package lab3;
+
 import java.util.stream.Stream;
 import java.nio.file.*;
 import java.io.*;

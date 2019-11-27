@@ -1,3 +1,5 @@
+package lab3;
+
 /******************************************************************************
  *  Compilation:  javac Stopwatch.java
  *  Execution:    java Stopwatch n
