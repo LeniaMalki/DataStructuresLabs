@@ -14,8 +14,8 @@ Group member B:    Johannes Mattsson
  *  How many hours did you spend on the assignment?
  *****************************************************************************/
 
-Group member A:    4
-Group member B:    4
+Group member A:    10
+Group member B:    10
 
 
 /******************************************************************************
