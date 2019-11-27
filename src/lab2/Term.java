@@ -34,9 +34,9 @@ public class Term {
             @Override
             public int compare(Term o1, Term o2) {
                 if (o1.weight<o2.weight){
-                    return 1;
-                }else if (o1.weight>o2.weight){
                     return -1;
+                }else if (o1.weight>o2.weight){
+                    return 1;
                 }
                 return 0;
             }
@@ -65,11 +65,6 @@ public class Term {
      */
     private static int limitedLexiCompare(Term o1, Term o2, int k){
         int length = Math.min(o1.query.length(), o2.query.length());
-
-
-        System.out.println("term 1"+ o1);
-
-        System.out.println("term 2"+ o2);
 
         for(int i = 0; i<length; i++) {
             if (i>k){

@@ -16,7 +16,6 @@ public class RangeBinarySearch {
         while (high>=lo){
 
             mid = (high-lo)/2 + lo;
-            //System.out.println("High: " + high +" Mid: " + mid +" Low: " + lo);
             int val = comparator.compare(key, a[mid]);
 
             if (val<0) {
@@ -28,7 +27,7 @@ public class RangeBinarySearch {
                     return mid;
                 }
                 //if the element before a[mid] is different from a[mid] break the loop and return index
-                if (comparator.compare(a[mid], a[mid - 1]) != 0) {
+                if (comparator.compare(key, a[mid - 1]) != 0) {
                     return mid;
                 } else {
                     high = mid-1;
@@ -63,7 +62,7 @@ public class RangeBinarySearch {
                     return mid;
                 }
                 //if the element before a[mid] is different from a[mid] break the loop and return index
-                if (comparator.compare(a[mid], a[mid + 1]) != 0) {
+                if (comparator.compare( a[mid+1], key) != 0) {
                     return mid;
                 } else {
                     lo = mid+1;
