@@ -67,16 +67,22 @@ public class Term {
         int length = Math.min(o1.query.length(), o2.query.length());
 
         for(int i = 0; i<length; i++) {
-            if (i>k){
-                return 0;
-            }
+
             if (o1.query.charAt(i)<o2.query.charAt(i)) {
                 return -1;
             } else if(o1.query.charAt(i)>o2.query.charAt(i)) {
                 return 1;
             }
+            if (i>=k-1){
+                return 0;
+            }
         }
-        return 0;//o2.query.compareTo(o1.query);
+        if (o1.query.length() > o2.query.length()){
+            return -1;
+        } else if (o1.query.length() < o2.query.length()){
+            return 1;
+        }
+        return 0;
     }
 
     // Returns a string representation of this term in the following format:
