@@ -82,6 +82,23 @@ public class Lab3 {
     // Phase 2: build index of n-grams (not implemented yet)
     static BST<Ngram, ArrayList<Path>> buildIndex(BST<Path, Ngram[]> files) {
         BST<Ngram, ArrayList<Path>> index = new BST<>();
+
+        files.keys().forEach(path -> {
+            Arrays.stream(files.get(path)).forEach(ngram -> {
+                    if(index.contains(ngram)) {
+                        ArrayList paths = index.get(ngram);
+                        paths.add(path);
+                        index.put(ngram, paths);
+                    } else {
+                        ArrayList paths = new ArrayList();
+                        paths.add(path);
+                        index.put(ngram, paths);
+                    }
+                }
+            );
+        });
+
+
         // TO DO: build index of n-grams
         return index;
     }
