@@ -97,9 +97,6 @@ public class Lab3 {
                 }
             );
         });
-
-
-        // TO DO: build index of n-grams
         return index;
     }
 
