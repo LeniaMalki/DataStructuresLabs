@@ -53,7 +53,7 @@ public class Lab3 {
 
             // Print out the plagiarism report!
             System.out.println("Plagiarism report:");
-            for (PathPair pair: mostSimilar)
+            for (PathPair pair : mostSimilar)
                 System.out.printf("%5d similarity: %s\n", similarity.get(pair), pair);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class Lab3 {
     // Phase 1: Read in each file and chop it into n-grams.
     static BST<Path, Ngram[]> readPaths(Path[] paths) throws IOException {
         BST<Path, Ngram[]> files = new BST<>();
-        for (Path path: paths) {
+        for (Path path : paths) {
             String contents = new String(Files.readAllBytes(path));
             Ngram[] ngrams = Ngram.ngrams(contents, 5);
             // Remove duplicates from the ngrams list
@@ -85,16 +85,16 @@ public class Lab3 {
 
         files.keys().forEach(path -> {
             Arrays.stream(files.get(path)).forEach(ngram -> {
-                    if(index.contains(ngram)) {
-                        ArrayList paths = index.get(ngram);
-                        paths.add(path);
-                        index.put(ngram, paths);
-                    } else {
-                        ArrayList paths = new ArrayList();
-                        paths.add(path);
-                        index.put(ngram, paths);
+                        if (index.contains(ngram)) {
+                            ArrayList paths = index.get(ngram);
+                            paths.add(path);
+                            index.put(ngram, paths);
+                        } else {
+                            ArrayList paths = new ArrayList();
+                            paths.add(path);
+                            index.put(ngram, paths);
+                        }
                     }
-                }
             );
         });
         return index;
@@ -106,23 +106,43 @@ public class Lab3 {
         // N.B. Path is Java's class for representing filenames
         // PathPair represents a pair of Paths (see PathPair.java)
         BST<PathPair, Integer> similarity = new BST<>();
-        for (Path path1: files.keys()) {
-            for (Path path2: files.keys()) {
+
+
+        //tror detta skall funka men får inte resultatet med procent i slutet
+        for (Ngram ngram :
+                index.keys()) {
+            if (index.get(ngram).size() > 1) {
+                ArrayList paths = index.get(ngram);
+                for (int i = 0; i < paths.size()-1; i++) {
+
+                    PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(i + 1));
+                    if (!similarity.contains(pair)) {
+                        similarity.put(pair, 0);
+                    }
+
+                    similarity.put(pair, similarity.get(pair) + 1);
+                }
+            }
+        }
+
+/*
+        for (Path path1 : files.keys()) {
+            for (Path path2 : files.keys()) {
                 if (path1.equals(path2)) continue;
-                for (Ngram ngram1: files.get(path1)) {
-                    for (Ngram ngram2: files.get(path2)) {
+                for (Ngram ngram1 : files.get(path1)) {
+                    for (Ngram ngram2 : files.get(path2)) {
                         if (ngram1.equals(ngram2)) {
                             PathPair pair = new PathPair(path1, path2);
 
                             if (!similarity.contains(pair))
                                 similarity.put(pair, 0);
 
-                            similarity.put(pair, similarity.get(pair)+1);
+                            similarity.put(pair, similarity.get(pair) + 1);
                         }
                     }
                 }
             }
-        }
+        }*/
 
         return similarity;
     }
@@ -132,7 +152,7 @@ public class Lab3 {
     static ArrayList<PathPair> findMostSimilar(BST<PathPair, Integer> similarity) {
         // Find all pairs of files with more than 100 n-grams in common.
         ArrayList<PathPair> mostSimilar = new ArrayList<>();
-        for (PathPair pair: similarity.keys()) {
+        for (PathPair pair : similarity.keys()) {
             if (similarity.get(pair) < 30) continue;
             // Only consider each pair of files once - (a, b) and not
             // (b,a) - and also skip pairs consisting of the same file twice
