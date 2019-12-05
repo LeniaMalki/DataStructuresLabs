@@ -113,20 +113,21 @@ public class Lab3 {
                 index.keys()) {
             if (index.get(ngram).size() > 1) {
                 ArrayList paths = index.get(ngram);
-                for (int i = 0; i < paths.size()-1; i++) {
-                    PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(i + 1));
-                    if (!similarity.contains(pair)) {
-                        similarity.put(pair, 0);
-                    }
+                for (int i = 0; i < paths.size(); i++) {
+                    for (int j = 1; j < paths.size(); j++) {
+                        if (j==i) continue;
+                        PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(j));
+                        if (!similarity.contains(pair)) {
+                            similarity.put(pair, 0);
+                        }
+                        similarity.put(pair, similarity.get(pair) + 1);
 
-                    similarity.put(pair, similarity.get(pair) + 1);
+                    }
                 }
             }
         }
 
-        for (PathPair pathPair: similarity.keys()){
-            System.out.println(pathPair.toString());
-        }
+
 
 /*
         for (Path path1 : files.keys()) {
@@ -146,7 +147,10 @@ public class Lab3 {
                 }
             }
         }*/
-
+        for (PathPair pathPair : similarity.keys()) {
+            System.out.println(pathPair.toString());
+            //System.out.println(" Matchningar: " + similarity.get(pathPair).toString());
+        }
         return similarity;
     }
 
