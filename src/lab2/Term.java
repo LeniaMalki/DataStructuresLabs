@@ -64,6 +64,21 @@ public class Term {
      * @return negative if o1 comes before o2, 0 if they are equal within the limit, positive if o1 comes after o2
      */
     private static int limitedLexiCompare(Term o1, Term o2, int k){
+
+        String s1;
+        String s2;
+        if (k <= o1.query.length()) {
+            s1 = o1.query.substring(0,k);
+        } else  {
+            s1 = o1.query;
+        }
+        if (k<= o2.query.length()){
+            s2 =  o2.query.substring(0,k);
+        }else{
+            s2 = o2.query;
+        }
+
+        return s1.compareTo(s2);   /*
         int length = Math.min(o1.query.length(), o2.query.length());
 
         for(int i = 0; i<length; i++) {
@@ -82,7 +97,7 @@ public class Term {
         } else if (o1.query.length() < o2.query.length()){
             return 1;
         }
-        return 0;
+        return 0;   */
     }
 
     // Returns a string representation of this term in the following format:
