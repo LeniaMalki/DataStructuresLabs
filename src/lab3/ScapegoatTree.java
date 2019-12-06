@@ -121,18 +121,19 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
         if (node == null) return new Node(key, val);
         int cmp = key.compareTo(node.key);
 
-        // TO DO: finish implementing put.
-		// If you like you can start from the code for put in BST.java.
-        // Read the lab instructions for more hints!
         if (cmp < 0) {
-            // key is less than node.key
+            node.left = put(node.left, key, val);
         } else if (cmp > 0) {
-            // key is greater than node.key
+            node.right = put(node.right, key, val);
         } else {
-            // key is equal to node.key
+            node.val = val;
+        }
+        node.size = 1 + size(node.left) + size(node.right);
+        if (node.height > alpha*Math.log(node.size)) {
+            rebuild(node);
         }
 
-        throw new UnsupportedOperationException();
+        return node;
     }
 
 	// Rebuild a tree to make it perfectly balanced.
@@ -146,7 +147,7 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
 	// Perform an inorder traversal of the subtree rooted at 'node', storing
 	// its nodes into the ArrayList 'nodes'.
     private void inorder(Node node, ArrayList<Node> nodes) {
-        // TO DO: use in-order traversal to store 'node' and all
+        // TODO: use in-order traversal to store 'node' and all
         // descendants into 'nodes' ArrayList
         throw new UnsupportedOperationException();
     }
