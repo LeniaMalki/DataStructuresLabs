@@ -120,7 +120,7 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
     }
 
     private Node put(Node node, Key key, Value val) {
-        if (node == null) return new Node(key, val);
+        if (node == null || node.key.equals(key)) return new Node(key, val);
         int cmp = key.compareTo(node.key);
 
         if (cmp < 0) {
@@ -130,6 +130,7 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
         } else {
             node.val = val;
         }
+
         node.size = 1 + size(node.left) + size(node.right);
         node.height = 1 + Math.max(height(node.left), height(node.right));
         if (node.height > alpha * log2(node.size)) {
