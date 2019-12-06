@@ -54,7 +54,6 @@ public class Lab3 {
             // Print out the plagiarism report!
             System.out.println("Plagiarism report:");
             for (PathPair pair : mostSimilar) {
-                System.out.println("Tekfna");
                 System.out.printf("%5d similarity: %s\n", similarity.get(pair), pair);
             }
         } catch (IOException e) {
@@ -135,7 +134,7 @@ public class Lab3 {
             // Only consider each pair of files once - (a, b) and not
             // (b,a) - and also skip pairs consisting of the same file twice
             if (pair.path1.compareTo(pair.path2) <= 0) continue;
-            System.out.println("LIFERVKAN " + pair);
+
             mostSimilar.add(pair);
         }
 
