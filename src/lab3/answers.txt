@@ -29,14 +29,14 @@ Finding the most similar files took 0.07 seconds
 In total the program took 469.52 seconds
 
 
-A: As small have a file size of 7 it is no surprise that it only takes 2.52 seconds.
-Comparing it to the medium file which has the file size 110 which took 469.52. it is almost 200 the times slower on a 15 times bigger file.
+A: As small have a size of 20 000 Ngrams it is no surprise that it only takes 2.52 seconds.
+Comparing it to the medium file which has 200 000 Ngrams which took 469.52. it is almost 200 the times slower on a 10 times bigger file.
 This is expected giving the quadratic time complexity.
 
 Q: How long do you predict the program would take to run on the 'huge'
 directory?
 
-A:
+A: As huge have 4 000 000
 
 Using binary search trees
 -------------------------
