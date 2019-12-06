@@ -1,11 +1,8 @@
 package lab3;
 
-import java.util.stream.Stream;
 import java.nio.file.*;
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.function.*;
 
 // The main plagiarism detection program.
 // You only need to change buildIndex() and findSimilarity().
