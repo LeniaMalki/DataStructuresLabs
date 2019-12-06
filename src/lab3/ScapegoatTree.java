@@ -133,7 +133,7 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
         node.size = 1 + size(node.left) + size(node.right);
         node.height = 1 + Math.max(height(node.left), height(node.right));
         if (node.height > alpha * log2(node.size)) {
-            rebuild(node);
+            node = rebuild(node);
         }
 
         return node;
@@ -144,7 +144,6 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
     private Node rebuild(Node node) {
         ArrayList<Node> nodes = new ArrayList<>();
         inorder(node, nodes);
-        System.out.println(node.toString());
         return makeBalancedBST(nodes, 0, nodes.size() - 1);
     }
 

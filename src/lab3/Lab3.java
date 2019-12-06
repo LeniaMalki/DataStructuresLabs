@@ -106,19 +106,19 @@ public class Lab3 {
         ScapegoatTree<PathPair, Integer> similarity = new ScapegoatTree<>();
         for (Ngram ngram :
                 index.keys()) {
-            if (index.get(ngram).size() > 1) {
-                ArrayList paths = index.get(ngram);
-                for (int i = 0; i < paths.size(); i++) {
-                    for (int j = 0; j < paths.size(); j++) {
-                        if (j==i) continue;
-                        PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(j));
-                        if (!similarity.contains(pair)) {
-                            similarity.put(pair, 0);
-                        }
-                        similarity.put(pair, similarity.get(pair) + 1);
+            if (!(index.get(ngram).size() > 1)) continue;
+            ArrayList paths = index.get(ngram);
+            for (int i = 0; i < paths.size(); i++) {
+                for (int j = 0; j < paths.size(); j++) {
+                    if (j == i) continue;
+                    PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(j));
+                    if (!similarity.contains(pair)) {
+                        similarity.put(pair, 0);
                     }
+                    similarity.put(pair, similarity.get(pair) + 1);
                 }
             }
+
         }
 
         return similarity;
