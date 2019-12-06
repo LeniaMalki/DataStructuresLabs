@@ -53,8 +53,10 @@ public class Lab3 {
 
             // Print out the plagiarism report!
             System.out.println("Plagiarism report:");
-            for (PathPair pair : mostSimilar)
+            for (PathPair pair : mostSimilar) {
+                System.out.println("Tekfna");
                 System.out.printf("%5d similarity: %s\n", similarity.get(pair), pair);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,14 +116,13 @@ public class Lab3 {
             if (index.get(ngram).size() > 1) {
                 ArrayList paths = index.get(ngram);
                 for (int i = 0; i < paths.size(); i++) {
-                    for (int j = 1; j < paths.size(); j++) {
+                    for (int j = 0; j < paths.size(); j++) {
                         if (j==i) continue;
                         PathPair pair = new PathPair((Path) paths.get(i), (Path) paths.get(j));
                         if (!similarity.contains(pair)) {
                             similarity.put(pair, 0);
                         }
                         similarity.put(pair, similarity.get(pair) + 1);
-
                     }
                 }
             }
@@ -146,9 +147,11 @@ public class Lab3 {
                     }
                 }
             }
-        }*/
+        }
+
+ */
         for (PathPair pathPair : similarity.keys()) {
-            System.out.println(pathPair.toString());
+            //System.out.println(pathPair.toString());
             //System.out.println(" Matchningar: " + similarity.get(pathPair).toString());
         }
         return similarity;
@@ -164,7 +167,7 @@ public class Lab3 {
             // Only consider each pair of files once - (a, b) and not
             // (b,a) - and also skip pairs consisting of the same file twice
             if (pair.path1.compareTo(pair.path2) <= 0) continue;
-
+            System.out.println("LIFERVKAN " + pair);
             mostSimilar.add(pair);
         }
 
