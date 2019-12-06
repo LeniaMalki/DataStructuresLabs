@@ -147,9 +147,12 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
 	// Perform an inorder traversal of the subtree rooted at 'node', storing
 	// its nodes into the ArrayList 'nodes'.
     private void inorder(Node node, ArrayList<Node> nodes) {
-        // TODO: use in-order traversal to store 'node' and all
-        // descendants into 'nodes' ArrayList
-        throw new UnsupportedOperationException();
+        if(node==null){
+            return;
+        }
+        inorder(node.left,nodes);
+        nodes.add(node);
+        inorder(node.right,nodes);
     }
 
 	// Convert an array of nodes into a balanced BST.
