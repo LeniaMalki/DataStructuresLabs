@@ -56,7 +56,7 @@ Q: Now what is the total complexity of buildIndex and findSimilarity?
 Again, assume a total of N 5-grams, and a constant number of 5-grams that
 occur in more than one file.
 
-A:
+A: worst case n^2, best case n, average n log n
 
 Q (optional): What if the total similarity score is an arbitrary number S,
 rather than a small constant?
