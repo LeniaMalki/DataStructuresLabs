@@ -64,7 +64,7 @@ Using binary search trees
 
 Q: Which of the trees usually become unbalanced?
 
-A:
+A: Files is very unbalanced. Index is also unbalanced.
 
 Q (optional): Is there a simple way to stop these trees becoming unbalanced?
 
