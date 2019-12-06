@@ -6,7 +6,7 @@ Answer in terms of N, the total number of 5-grams in the input files.
 Assume that the number of 5-grams that occur in more than one file is a small
 constant - that is, there is not much plagiarised text.
 
-A: 
+A: n^2
 
 Q: How long did the program take on the 'small' and 'medium' directories?
 Is the ratio between the times what you would expect, given the complexity?
@@ -29,7 +29,9 @@ Finding the most similar files took 0.07 seconds
 In total the program took 469.52 seconds
 
 
-A:
+A: As small have a file size of 7 it is no surprise that it only takes 2.52 seconds.
+Comparing it to the medium file which has the file size 110 which took 469.52. it is almost 200 the times slower on a 15 times bigger file.
+This is expected giving the quadratic time complexity.
 
 Q: How long do you predict the program would take to run on the 'huge'
 directory?
