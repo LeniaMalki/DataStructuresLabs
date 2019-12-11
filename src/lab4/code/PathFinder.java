@@ -1,10 +1,6 @@
 package lab4.code;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 import java.util.stream.Collectors;
 
@@ -94,9 +90,25 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
+        HashMap GraphMap = new HashMap<>();
+        List paths;
+
+        for(DirectedEdge edge : graph.outgoingEdges(start)) {
+            if (GraphMap.containsKey(edge)) {
+                paths = new ArrayList();
+                paths.add(GraphMap.get(edge));
+                paths.add(edge.to());
+                GraphMap.put(edge, paths);
+            } else {
+                paths = new ArrayList();
+                paths.add(edge.to());
+                GraphMap.put(edge, paths);
+            }
+        }
+
         int visitedNodes = 0;
         /********************
-         * TODO: Task 1 
+         * TODO: Task 1
          ********************/
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
