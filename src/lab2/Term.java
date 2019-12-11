@@ -34,13 +34,10 @@ public class Term {
             @Override
             public int compare(Term o1, Term o2) {
                 if (o1.weight<o2.weight){
-                    System.out.println(o1.weight + " e: " + o2.weight + " och -1");
                     return -1;
                 }else if (o1.weight>o2.weight){
-                    System.out.println(o1.weight + " e: " + o2.weight + " och 1");
                     return 1;
                 }
-                System.out.println(o1.weight + " e: " + o2.weight + " och 0");
                 return 0;
             }
         };
