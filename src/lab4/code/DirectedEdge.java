@@ -1,4 +1,4 @@
-
+package lab4.code;
 
 public class DirectedEdge<V> { 
 
