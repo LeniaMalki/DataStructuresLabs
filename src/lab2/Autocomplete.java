@@ -12,7 +12,7 @@ public class Autocomplete {
         }
 
         this.terms = terms.clone();
-        Arrays.sort(this.terms, Term.byReverseWeightOrder());
+        Arrays.sort(this.terms, Term.byPrefixOrder(terms.length));
     }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
@@ -23,7 +23,6 @@ public class Autocomplete {
         }
 
         int firstIndex = RangeBinarySearch.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-        System.out.println(firstIndex);
         if (firstIndex == -1) { //If there is no match return
             return new Term[0];
         }
@@ -49,7 +48,6 @@ public class Autocomplete {
 
         int firstIndex = RangeBinarySearch.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         int lastIndex  = RangeBinarySearch.lastIndexOf (this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-        System.out.println(lastIndex + "     " +firstIndex);
         return lastIndex-firstIndex;
     }
 
