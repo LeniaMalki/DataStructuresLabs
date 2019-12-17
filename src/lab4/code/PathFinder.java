@@ -96,17 +96,22 @@ public class PathFinder<V> {
         Comparator<V> comparator = Comparator.naturalOrder(); // TODO fix
         Queue<V> pq = new PriorityQueue<>(comparator);
 
+        int visitedNodes = 0;
         Set visited = new HashSet();
         pq.add(start);
         distTo.put(start, 0.0);
 
         while(!pq.isEmpty()) {
             V v = pq.poll();
+            visitedNodes++;
 
             if(!visited.contains(v)) {
                 visited.add(v);
                 if(v==goal){
                     // TODO calculate path and return it
+                    int cost = 0;
+
+                    return new Result<>(true, start, goal, cost, null, visitedNodes);
                 }
                 for(DirectedEdge edge : graph.outgoingEdges(v)){
                     V w = (V)edge.to();
@@ -121,7 +126,6 @@ public class PathFinder<V> {
 
         }
 
-        int visitedNodes = visited.size();
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
     
