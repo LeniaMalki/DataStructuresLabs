@@ -129,6 +129,7 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
             node.right = put(node.right, key, val);
         } else {
             node.val = val;
+            return node;
         }
 
         node.size = 1 + size(node.left) + size(node.right);
