@@ -90,6 +90,7 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
+        int visitedNodes = 0;
         HashMap GraphMap = new HashMap<>();
         HashMap edgeTo = new HashMap<>();
         HashMap distTo = new HashMap<>();
@@ -120,11 +121,7 @@ public class PathFinder<V> {
             }
 
         }
-        
-        int visitedNodes = 0;
-        /********************
-         * TODO: Task 1
-         ********************/
+
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
     
