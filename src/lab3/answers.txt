@@ -36,7 +36,7 @@ This is expected giving the quadratic time complexity.
 Q: How long do you predict the program would take to run on the 'huge'
 directory?
 
-A: As huge have 4 000 000 n-grams we expect it to take as much as 187 680 000 seconds.
+A: As huge have 4 000 000 n-grams we expect it to take as much as 375 200 seconds.
 
 Using binary search trees
 -------------------------
