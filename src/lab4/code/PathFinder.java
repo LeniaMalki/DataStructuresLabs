@@ -90,7 +90,6 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
-        HashMap GraphMap = new HashMap<>();
         HashMap edgeTo = new HashMap<>();
         HashMap distTo = new HashMap<>();
         Comparator<V> comparator = Comparator.naturalOrder(); // TODO fix
@@ -108,7 +107,7 @@ public class PathFinder<V> {
             if(!visited.contains(v)) {
                 visited.add(v);
                 if(v==goal){
-                    // TODO calculate path and return it
+                    // TODO calculate path and cost and return them
                     int cost = 0;
 
                     return new Result<>(true, start, goal, cost, null, visitedNodes);
@@ -123,7 +122,6 @@ public class PathFinder<V> {
                     }
                 }
             }
-
         }
 
         return new Result<>(false, start, null, -1, null, visitedNodes);
