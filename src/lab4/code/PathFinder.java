@@ -90,7 +90,6 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
-        int visitedNodes = 0;
         HashMap GraphMap = new HashMap<>();
         HashMap edgeTo = new HashMap<>();
         HashMap distTo = new HashMap<>();
@@ -110,11 +109,11 @@ public class PathFinder<V> {
                     // TODO calculate path and return it
                 }
                 for(DirectedEdge edge : graph.outgoingEdges(v)){
-                    Object w = edge.to();
-                    double newDist = distTo.get(v) + edge.weight(); // TODO fix type
-                    if(distTo.get(w) > newDist) {
+                    V w = (V)edge.to();
+                    double newDist = (double)distTo.get(v) + edge.weight();
+                    if((double)distTo.get(w) > newDist) {
                         distTo.put(w, newDist);
-                        edgeTo.put(w, e);
+                        edgeTo.put(w, edge);
                         pq.add(w);
                     }
                 }
@@ -122,6 +121,7 @@ public class PathFinder<V> {
 
         }
 
+        int visitedNodes = visited.size();
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
     
