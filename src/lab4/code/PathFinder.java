@@ -91,21 +91,36 @@ public class PathFinder<V> {
 
     public Result<V> searchDijkstra(V start, V goal) {
         HashMap GraphMap = new HashMap<>();
-        List paths;
+        HashMap edgeTo = new HashMap<>();
+        HashMap distTo = new HashMap<>();
+        Comparator<V> comparator = Comparator.naturalOrder(); // TODO fix
+        Queue<V> pq = new PriorityQueue<>(comparator);
 
-        for(DirectedEdge edge : graph.outgoingEdges(start)) {
-            if (GraphMap.containsKey(edge)) {
-                paths = new ArrayList();
-                paths.add(GraphMap.get(edge));
-                paths.add(edge.to());
-                GraphMap.put(edge, paths);
-            } else {
-                paths = new ArrayList();
-                paths.add(edge.to());
-                GraphMap.put(edge, paths);
+        Set visited = new HashSet();
+        pq.add(start);
+        distTo.put(start, 0.0);
+
+        while(!pq.isEmpty()) {
+            V v = pq.poll();
+
+            if(!visited.contains(v)) {
+                visited.add(v);
+                if(v==goal){
+                    // TODO calculate path and return it
+                }
+                for(DirectedEdge edge : graph.outgoingEdges(v)){
+                    Object w = edge.to();
+                    double newDist = distTo.get(v) + edge.weight(); // TODO fix type
+                    if(distTo.get(w) > newDist) {
+                        distTo.put(w, newDist);
+                        edgeTo.put(w, e);
+                        pq.add(w);
+                    }
+                }
             }
-        }
 
+        }
+        
         int visitedNodes = 0;
         /********************
          * TODO: Task 1
