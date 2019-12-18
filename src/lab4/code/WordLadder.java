@@ -70,27 +70,20 @@ public class WordLadder implements DirectedGraph<String> {
         //System.out.println("jag vet ej vad jag gör...");
         //System.out.println(dictionary.size() + "   lång     " + dictionary.toString());
 
-        //creates a new dictionary with only words of the same length to save time later
-        Set<String> nDictionary = new HashSet<>();
-        for (String s:
-             dictionary) {
-            if (s.length()==word.length())nDictionary.add(s);
-        }
-
         //compares the word with all the words in the dictionary to find the ones that are one char of
         for (int ch = 0; ch < word.length(); ch++) {
             List chars = word.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+
             chars.remove(ch);
-            for (String s: nDictionary){
+            for (String s: dictionary){
+                if (!(s.length()==word.length()))continue;
                 List compChars = s.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
                 compChars.remove(ch);
-                if (compChars.equals(ch)){
-                    outgoingEdges.add(new DirectedEdge<String>(word, s));
+                if (compChars.equals(chars)){
+                    outgoingEdges.add(new DirectedEdge<>(word, s));
                 }
             }
         }
-        System.out.println(charset.toString());
-
 
         return outgoingEdges;
     }
