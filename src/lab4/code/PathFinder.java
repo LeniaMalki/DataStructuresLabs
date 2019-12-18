@@ -103,28 +103,29 @@ public class PathFinder<V> {
         distTo.put(start, 0.0);
 
         while (!pq.isEmpty()) {
-            V v = pq.poll();
+            V currV = pq.poll();
             visitedNodes++;
 
-            if (!visited.contains(v)) {
-                visited.add(v);
+            if (!visited.contains(currV)) {
+                visited.add(currV);
                 //System.out.println(v.toString() + " "+goal.toString());
-                if (v.toString().compareTo(goal.toString()) == 0) {
+                if (currV.toString().compareTo(goal.toString()) == 0) {
                     // TODO calculate path and cost and return them
-                    Iterator iterableList = edgeTo.entrySet().iterator();
-                    while (iterableList.hasNext()) {
-                        V dEdge = (V) iterableList.next();
-                        if (dEdge.toString().compareTo(v.toString()) == 0) {
-                            bestPath.add(dEdge);
+                    for (Object edgeO : edgeTo.entrySet()) {
+                        String s = edgeO.toString().substring(0,currV.toString().length());
+                        System.out.println(s + "       gämfört med       " + currV.toString());
+                        if (s.compareTo(currV.toString()) == 0) {
+                            System.out.println(edgeO.toString() + "wääääääääääääääääääääääääääääähhhhhh");
+                            bestPath.add((V) edgeO);
                         }
                     }
-                    Double cost = (Double) distTo.get(v);
+                    Double cost = (Double) distTo.get(currV);
 
                     return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
                 }
-                for (DirectedEdge edge : graph.outgoingEdges(v)) {
+                for (DirectedEdge edge : graph.outgoingEdges(currV)) {
                     V w = (V) edge.to();
-                    double newDist = (double) distTo.get(v) + edge.weight();
+                    double newDist = (double) distTo.get(currV) + edge.weight();
                     if (distTo.containsKey(w)) {
                         if ((double) distTo.get(w) > newDist) {
                             distTo.put(w, newDist);
