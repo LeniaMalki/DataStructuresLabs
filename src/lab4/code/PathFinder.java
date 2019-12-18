@@ -52,9 +52,12 @@ public class PathFinder<V> {
     public Result<V> search(String algorithm, V start, V goal) {
         startTimeMillis = System.currentTimeMillis();
         switch (algorithm) {
-        case "random":   return searchRandom(start, goal);
-        case "dijkstra": return searchDijkstra(start, goal);
-        case "astar":    return searchAstar(start, goal);
+            case "random":
+                return searchRandom(start, goal);
+            case "dijkstra":
+                return searchDijkstra(start, goal);
+            case "astar":
+                return searchAstar(start, goal);
         }
         throw new IllegalArgumentException("Unknown search algorithm: " + algorithm);
     }
@@ -99,19 +102,19 @@ public class PathFinder<V> {
         pq.add(start);
         distTo.put(start, 0.0);
 
-        while(!pq.isEmpty()) {
+        while (!pq.isEmpty()) {
             V v = pq.poll();
             visitedNodes++;
 
-            if(!visited.contains(v)) {
+            if (!visited.contains(v)) {
                 visited.add(v);
-                System.out.println(v.toString() + " "+goal.toString());
-                if(v.toString().compareTo(goal.toString())==0){
+                System.out.println(v.toString() + " " + goal.toString());
+                if (v.toString().compareTo(goal.toString()) == 0) {
                     // TODO calculate path and cost and return them
                     Iterator iterableList = edgeTo.entrySet().iterator();
-                    while (iterableList.hasNext()){
+                    while (iterableList.hasNext()) {
                         V dEdge = (V) iterableList.next();
-                        if(dEdge.toString().compareTo(v.toString())==0){
+                        if (dEdge.toString().compareTo(v.toString()) == 0) {
                             bestPath.add(dEdge);
                         }
                     }
@@ -119,9 +122,9 @@ public class PathFinder<V> {
 
                     return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
                 }
-                for(DirectedEdge edge : graph.outgoingEdges(v)){
-                    V w = (V)edge.to();
-                    double newDist = (double)distTo.get(v) + edge.weight();
+                for (DirectedEdge edge : graph.outgoingEdges(v)) {
+                    V w = (V) edge.to();
+                    double newDist = (double) distTo.get(v) + edge.weight();
                     if (distTo.containsKey(w)) {
                         if ((double) distTo.get(w) > newDist) {
                             distTo.put(w, newDist);
@@ -139,7 +142,7 @@ public class PathFinder<V> {
         }
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
-    
+
 
     public Result<V> searchAstar(V start, V goal) {
         int visitedNodes = 0;
