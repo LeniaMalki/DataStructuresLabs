@@ -93,9 +93,11 @@ public class PathFinder<V> {
 
     public Result<V> searchDijkstra(V start, V goal) {
         int visitedNodes = 0;
-        HashMap edgeTo = new HashMap<V, V>();
-        HashMap distTo = new HashMap<V, Integer>();
-        PriorityQueue<V> pq = new PriorityQueue<>();
+        HashMap<V, DirectedEdge<V>> edgeTo = new HashMap();
+        HashMap<V, Double> distTo = new HashMap();
+
+        Comparator<V> comparator = Comparator.comparing(distTo::get);
+        Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
         Set visited = new HashSet();
 
@@ -103,40 +105,36 @@ public class PathFinder<V> {
         distTo.put(start, 0.0);
 
         while (!pq.isEmpty()) {
-            V currV = pq.poll();
+            V currentV = pq.poll();
             visitedNodes++;
 
-            if (!visited.contains(currV)) {
-                visited.add(currV);
+            if (!visited.contains(currentV)) {
+                visited.add(currentV);
                 //System.out.println(v.toString() + " "+goal.toString());
-                if (currV.toString().compareTo(goal.toString()) == 0) {
-                    // TODO calculate path and cost and return them
-                    for (Object edgeO : edgeTo.entrySet()) {
-                        String s = edgeO.toString().substring(0,currV.toString().length());
-                        System.out.println(s + "       gämfört med       " + currV.toString());
-                        if (s.compareTo(currV.toString()) == 0) {
-                            System.out.println(edgeO.toString() + "wääääääääääääääääääääääääääääähhhhhh");
-                            bestPath.add((V) edgeO);
-                        }
+                if (currentV.toString().compareTo(goal.toString()) == 0) {
+
+                    V term = goal;
+
+                    while (term != start) {
+                        bestPath.add(term);
+                        term = (V) edgeTo.get((V) term).from();
                     }
-                    Double cost = (Double) distTo.get(currV);
+                    bestPath.add(start);
+                    Collections.reverse(bestPath);
+
+                    Double cost = distTo.get(currentV);
 
                     return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
                 }
-                for (DirectedEdge edge : graph.outgoingEdges(currV)) {
-                    V w = (V) edge.to();
-                    double newDist = (double) distTo.get(currV) + edge.weight();
-                    if (distTo.containsKey(w)) {
-                        if ((double) distTo.get(w) > newDist) {
-                            distTo.put(w, newDist);
-                            edgeTo.put(w, edge);
-                            pq.add(w);
-                        }
-                    } else {
-                        distTo.put(w, newDist);
-                        edgeTo.put(w, edge);
-                        pq.add(w);
-                    }
+                for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
+                    V w = edge.to();
+                    double newDist = distTo.get(currentV) + edge.weight();
+                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) continue;
+
+                    distTo.put(w, newDist);
+                    edgeTo.put(w, edge);
+                    pq.add(w);
+
                     //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
             }
