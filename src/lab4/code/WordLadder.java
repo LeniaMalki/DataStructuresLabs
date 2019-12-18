@@ -77,6 +77,7 @@ public class WordLadder implements DirectedGraph<String> {
             chars.remove(ch);
             for (String s: dictionary){
                 if (!(s.length()==word.length()))continue;
+                if (s.equals(word))continue;
                 List compChars = s.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
                 compChars.remove(ch);
                 if (compChars.equals(chars)){
