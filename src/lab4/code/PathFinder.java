@@ -1,8 +1,6 @@
 package lab4.code;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.*;
-
 import java.util.stream.Collectors;
 
 
@@ -91,20 +89,18 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
+        int visitedNodes = 0;
         HashMap edgeTo = new HashMap<V, V>();
         HashMap distTo = new HashMap<V, Integer>();
         PriorityQueue<V> pq = new PriorityQueue<>();
-
         List<V> bestPath = new ArrayList<>();
-
-        int visitedNodes = 0;
         Set visited = new HashSet();
+
         pq.add(start);
         distTo.put(start, 0.0);
 
         while(!pq.isEmpty()) {
             V v = pq.poll();
-
             visitedNodes++;
 
             if(!visited.contains(v)) {
@@ -119,7 +115,6 @@ public class PathFinder<V> {
                             bestPath.add(dEdge);
                         }
                     }
-
                     Double cost = (Double) distTo.get(v);
 
                     return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
@@ -142,7 +137,6 @@ public class PathFinder<V> {
                 }
             }
         }
-
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
     
