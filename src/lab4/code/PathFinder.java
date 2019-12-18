@@ -147,9 +147,53 @@ public class PathFinder<V> {
 
     public Result<V> searchAstar(V start, V goal) {
         int visitedNodes = 0;
-        /********************
-         * TODO: Task 3
-         ********************/
+        HashMap edgeTo = new HashMap<V, V>();
+        HashMap distTo = new HashMap<V, Integer>();
+        PriorityQueue<V> pq = new PriorityQueue<>();
+        List<V> bestPath = new ArrayList<>();
+        Set visited = new HashSet();
+
+        pq.add(start);
+        distTo.put(start, 0.0);
+
+        while (!pq.isEmpty()) {
+            V v = pq.poll();
+            visitedNodes++;
+
+            if (!visited.contains(v)) {
+                visited.add(v);
+                //System.out.println(v.toString() + " "+goal.toString());
+                if (v.toString().compareTo(goal.toString()) == 0) {
+                    // TODO calculate path and cost and return them
+                    Iterator iterableList = edgeTo.entrySet().iterator();
+                    while (iterableList.hasNext()) {
+                        V dEdge = (V) iterableList.next();
+                        if (dEdge.toString().compareTo(v.toString()) == 0) {
+                            bestPath.add(dEdge);
+                        }
+                    }
+                    Double cost = (Double) distTo.get(v);
+
+                    return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
+                }
+                for (DirectedEdge edge : graph.outgoingEdges(v)) {
+                    V w = (V) edge.to();
+                    double newDist = (double) distTo.get(v) + edge.weight();
+                    if (distTo.containsKey(w)) {
+                        if ((double) distTo.get(w) > newDist) {
+                            distTo.put(w, newDist);
+                            edgeTo.put(w, edge);
+                            pq.add(w);
+                        }
+                    } else {
+                        distTo.put(w, newDist);
+                        edgeTo.put(w, edge);
+                        pq.add(w);
+                    }
+                    //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
+                }
+            }
+        }
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
 

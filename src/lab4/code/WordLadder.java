@@ -65,16 +65,22 @@ public class WordLadder implements DirectedGraph<String> {
     public List<DirectedEdge<String>> outgoingEdges(String word) {
         List<DirectedEdge<String>> outgoingEdges = new LinkedList<>();
 
-        List chars = word.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+        List chars = word.chars()
+            .mapToObj(letter -> (char) letter)
+            .collect(Collectors.toList());
 
         for (int ch = 0; ch < word.length(); ch++) {
             List wordVariation = new ArrayList(chars);
             wordVariation.remove(ch);
 
             for (String dictWord: dictionary) {
-                if (!(dictWord.length() == word.length()))continue;
-                if (dictWord.equals(word))continue;
-                List compChars = dictWord.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+                if (!(dictWord.length() == word.length())) continue;
+                if (dictWord.equals(word)) continue;
+
+                List compChars = dictWord.chars()
+                    .mapToObj(letter -> (char) letter)
+                    .collect(Collectors.toList());
+
                 compChars.remove(ch);
                 if (compChars.equals(wordVariation)) {
                     outgoingEdges.add(new DirectedEdge<>(word, dictWord));
