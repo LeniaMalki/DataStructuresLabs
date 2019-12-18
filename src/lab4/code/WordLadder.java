@@ -63,25 +63,21 @@ public class WordLadder implements DirectedGraph<String> {
      * @return the edges incident on node {@code word} as a List
      */
     public List<DirectedEdge<String>> outgoingEdges(String word) {
-        /********************
-         * TODO: Task 2
-         ********************/
         List<DirectedEdge<String>> outgoingEdges = new LinkedList<>();
-        //System.out.println("jag vet ej vad jag gör...");
-        //System.out.println(dictionary.size() + "   lång     " + dictionary.toString());
 
-        //compares the word with all the words in the dictionary to find the ones that are one char of
+        List chars = word.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+
         for (int ch = 0; ch < word.length(); ch++) {
-            List chars = word.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+            List wordVariation = new ArrayList(chars);
+            wordVariation.remove(ch);
 
-            chars.remove(ch);
-            for (String s: dictionary){
-                if (!(s.length()==word.length()))continue;
-                if (s.equals(word))continue;
-                List compChars = s.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+            for (String dictWord: dictionary) {
+                if (!(dictWord.length() == word.length()))continue;
+                if (dictWord.equals(word))continue;
+                List compChars = dictWord.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
                 compChars.remove(ch);
-                if (compChars.equals(chars)){
-                    outgoingEdges.add(new DirectedEdge<>(word, s));
+                if (compChars.equals(wordVariation)) {
+                    outgoingEdges.add(new DirectedEdge<>(word, dictWord));
                 }
             }
         }
