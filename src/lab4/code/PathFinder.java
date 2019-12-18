@@ -108,7 +108,7 @@ public class PathFinder<V> {
 
             if (!visited.contains(v)) {
                 visited.add(v);
-                System.out.println(v.toString() + " " + goal.toString());
+                //System.out.println(v.toString() + " "+goal.toString());
                 if (v.toString().compareTo(goal.toString()) == 0) {
                     // TODO calculate path and cost and return them
                     Iterator iterableList = edgeTo.entrySet().iterator();
