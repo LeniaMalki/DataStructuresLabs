@@ -1,9 +1,6 @@
 package lab4.code;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 import java.util.stream.Collectors;
 
@@ -11,6 +8,7 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 
 public class WordLadder implements DirectedGraph<String> {
@@ -29,15 +27,16 @@ public class WordLadder implements DirectedGraph<String> {
         dictionary = new HashSet<>();
         charset = new HashSet<>();
         Files.lines(Paths.get(file))
-            .filter(line -> !line.startsWith("#"))
-            .forEach(word -> addWord(word.trim()));
+                .filter(line -> !line.startsWith("#"))
+                .forEach(word -> addWord(word.trim()));
     }
 
 
     /**
      * Adds the {@code word} to the dictionary, if it only contains letters.
      * The word is converted to lowercase.
-     * @param word  the word
+     *
+     * @param word the word
      */
     public void addWord(String word) {
         // 
@@ -60,14 +59,40 @@ public class WordLadder implements DirectedGraph<String> {
 
 
     /**
-     * @param  word  a graph node
+     * @param word a graph node
      * @return the edges incident on node {@code word} as a List
      */
     public List<DirectedEdge<String>> outgoingEdges(String word) {
         /********************
          * TODO: Task 2
          ********************/
-        return new LinkedList<>();
+        List<DirectedEdge<String>> outgoingEdges = new LinkedList<>();
+        //System.out.println("jag vet ej vad jag gör...");
+        //System.out.println(dictionary.size() + "   lång     " + dictionary.toString());
+
+        //creates a new dictionary with only words of the same length to save time later
+        Set<String> nDictionary = new HashSet<>();
+        for (String s:
+             dictionary) {
+            if (s.length()==word.length())nDictionary.add(s);
+        }
+
+        //compares the word with all the words in the dictionary to find the ones that are one char of
+        for (int ch = 0; ch < word.length(); ch++) {
+            List chars = word.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+            chars.remove(ch);
+            for (String s: nDictionary){
+                List compChars = s.chars().mapToObj(letter -> (char) letter).collect(Collectors.toList());
+                compChars.remove(ch);
+                if (compChars.equals(ch)){
+                    outgoingEdges.add(new DirectedEdge<String>(word, s));
+                }
+            }
+        }
+        System.out.println(charset.toString());
+
+
+        return outgoingEdges;
     }
 
 
@@ -85,7 +110,7 @@ public class WordLadder implements DirectedGraph<String> {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Word ladder with " + nrNodes() + " words, " +
-                 "charset: \"" + charset.stream().map(x -> x.toString()).collect(Collectors.joining()) + "\"\n\n");
+                "charset: \"" + charset.stream().map(x -> x.toString()).collect(Collectors.joining()) + "\"\n\n");
         int ctr = 0;
         s.append("Example words and ladder steps:\n");
         for (String v : dictionary) {
@@ -101,7 +126,8 @@ public class WordLadder implements DirectedGraph<String> {
 
     /**
      * Unit tests the class
-     * @param args  the command-line arguments
+     *
+     * @param args the command-line arguments
      */
     public static void main(String[] args) {
         try {
