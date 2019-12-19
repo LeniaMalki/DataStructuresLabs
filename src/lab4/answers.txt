@@ -91,7 +91,8 @@ shortest path: [...]
  *  Why do you think this is the case?
  *****************************************************************************/
 
-[...]
+WordLadder we think it is because there are a lot more "paths"/combinations to take than there are in GridGraph and NPuzzle.
+So guessing the right direction gives more of a difference. NPuzzle also had a big impact. 
 
 
 /******************************************************************************
