@@ -99,18 +99,38 @@ shortest path: syster -> sylter -> salter -> balter -> balder -> barder -> barde
  *****************************************************************************/
 
 // WordLadder.outgoingEdges(String word)
+outoingEdges = new empty LinkedList
 
-[...]
+String start
+String end
+
+for every substring i in word
+    start = substring from start to i
+    end = substring from i to i+1
+
+    for every char in charset
+        sb = new stringbuilder from start
+        append char
+        append end
+
+        if dictionary contains sb
+            add new edge from word to sb in outgoing edges
+return outgoingEdges
+
 
 
 // WordLadder.guessCost(String v, String w)
 
-[...]
+count = new int that is 0
+for every char in string v
+    if char at i in v differs from char i in w
+        count++
+return count
 
 
-// GridGraph.guessCost(String v, String w)
+// GridGraph.guessCost(Coord start, Coord end)
 
-[...]
+return sqrt of ((start.x-end.x)^2 + (start.y - start.x) ^ 2)
 
 
 
