@@ -5,17 +5,17 @@
  *  Lab 4: Path finder
  ******************************************************************************/
 
-Name of lab group: [...]
-Group member A:    [...]
-Group member B:    [...]
+Name of lab group: 67
+Group member A:    Viktor Fredholm
+Group member B:    Johannes Mattsson
 
 
 /******************************************************************************
  *  How many hours did you spend on the assignment?
  *****************************************************************************/
 
-Group member A:    [...]
-Group member B:    [...]
+Group member A:    15
+Group member B:    15
 
 
 /******************************************************************************
@@ -118,9 +118,44 @@ shortest path: [...]
  *  Show pseudo-code of method .searchDijkstra() in PathFinder
  *****************************************************************************/
 
-// PathFinder.searchDijkstra(V start, V goal)
+Showing without the commonSeach extracton mentioned below.
 
-[...]
+// PathFinder.searchDijkstra(V start, V goal)
+visitedNodes = 0
+edgeTo = new empty hash map from nodes to edges
+distTo = new empty hash map from nodes to double
+
+queue = new priority queue, with nodes as elements,
+            and a comparator that compares distTo values
+bestPath = new empty list of bestPath
+visited = new empty set of nodes
+
+add start to pq
+distTo[start] = 0.0
+
+while queue is not empty:
+    v = delete minimal element from queue
+    visitedNode++
+
+    if v not in visited:
+        add v to visited
+        if v is the goal:
+            while goal is not start
+                add goal to bestPath
+                set goal to next edge from goal
+            add start to bestPath
+            reverse bestPath
+
+            cost = dist to current v
+            SUCCESS: return bestPath and cost
+        for every outgoing edge e from v:
+            w = e.to()
+            newdist = distTo[v] + e.weight()
+            if distTo[w] > newdist:
+                distTo[w] = newdist
+                edgeTo[w] = e
+                add w to queue
+return FAILURE
 
 
 /******************************************************************************
@@ -128,14 +163,15 @@ shortest path: [...]
  *  of .searchAstar() and .searchDijkstra()?
  *****************************************************************************/
 
-[...]
+The comparator. We extracted all the common code into its own method commonSearch().
+The difference in the comparator is A* adding guesscost to distTo before comparing.
 
 
 /******************************************************************************
  *  Are there any known bugs / limitations?
  *****************************************************************************/
 
-
+Not that we know of. It runs on Java 11 and 13.
 
 
 /******************************************************************************
@@ -145,14 +181,14 @@ shortest path: [...]
  *  may have used in creating your design.
  *****************************************************************************/
 
-
+We used the given pseudocode and the DijkstraSP. Also Wikipedia for A*.
 
 
 /******************************************************************************
  *  Describe any serious problems you encountered.                    
  *****************************************************************************/
 
-
+Starting with searchDijkstra was hard until we got the pseudocode.
 
 
 /******************************************************************************
@@ -162,5 +198,6 @@ shortest path: [...]
  *****************************************************************************/
 
 
-
+It was nice to improve on the search algorithms. As our first naive implementation of WordLadder was really bad compared
+to the one submitted. It was sometimes a too open ended assignment. Getting pseudocode for Dijkstra helped.
   
