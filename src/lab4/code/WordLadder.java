@@ -72,8 +72,7 @@ public class WordLadder implements DirectedGraph<String> {
             start = word.substring(0, i);
             end = word.substring(i + 1);
 
-            for (char c :
-                charset) {
+            for (char c : charset) {
                 StringBuilder sb = new StringBuilder(start);
                 sb.append(c);
                 sb.append(end);
