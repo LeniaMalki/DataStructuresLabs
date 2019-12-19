@@ -92,62 +92,23 @@ public class PathFinder<V> {
 
 
     public Result<V> searchDijkstra(V start, V goal) {
-        int visitedNodes = 0;
-        HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
         HashMap<V, Double> distTo = new HashMap<>();
-
         Comparator<V> comparator = Comparator.comparing(distTo::get);
-        Queue<V> pq = new PriorityQueue<>(comparator);
-        List<V> bestPath = new ArrayList<>();
-        Set<V> visited = new HashSet<>();
-
-        pq.add(start);
-        distTo.put(start, 0.0);
-
-        while (!pq.isEmpty()) {
-            V currentV = pq.poll();
-            visitedNodes++;
-
-            if (!visited.contains(currentV)) {
-                visited.add(currentV);
-                if (currentV.toString().compareTo(goal.toString()) == 0) {
-
-                    V term = goal;
-
-                    while (term != start) {
-                        bestPath.add(term);
-                        term = edgeTo.get(term).from();
-                    }
-                    bestPath.add(start);
-                    Collections.reverse(bestPath);
-
-                    Double cost = distTo.get(currentV);
-
-                    return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
-                }
-                for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
-                    V w = edge.to();
-                    double newDist = distTo.get(currentV) + edge.weight();
-                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
-                        continue;
-                    }
-
-                    distTo.put(w, newDist);
-                    edgeTo.put(w, edge);
-                    pq.add(w);
-                }
-            }
-        }
-        return new Result<>(false, start, null, -1, null, visitedNodes);
+        return commonSearch(start, goal, comparator, distTo);
     }
 
 
     public Result<V> searchAstar(V start, V goal) {
+        HashMap<V, Double> distTo = new HashMap<>();
+        Comparator<V> comparator = Comparator.comparingDouble(o -> distTo.get(o) + graph.guessCost(o, goal));
+        return commonSearch(start, goal, comparator, distTo);
+    }
+
+
+    public Result<V> commonSearch(V start, V goal, Comparator comparator, HashMap<V, Double> distTo) {
         int visitedNodes = 0;
         HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
-        HashMap<V, Double> distTo = new HashMap<>();
 
-        Comparator<V> comparator = Comparator.comparingDouble(o -> distTo.get(o) + graph.guessCost(o, goal));
         Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
         Set<V> visited = new HashSet<>();
