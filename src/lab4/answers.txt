@@ -91,8 +91,8 @@ shortest path: syster -> sylter -> salter -> balter -> balder -> barder -> barde
  *  Why do you think this is the case?
  *****************************************************************************/
 
-WordLadder we think it is because there are a lot more "paths"/combinations to take than there are in GridGraph and NPuzzle.
-So guessing the right direction gives more of a difference. NPuzzle also had a big impact. 
+NPuzzle we think it is because there are a lot more "paths"/combinations to take than there are in GridGraph and WordLAdder.
+So guessing the right direction gives more of a difference. WordLAdder also had a big impact.
 
 
 /******************************************************************************
@@ -192,7 +192,8 @@ The difference in the comparator is A* adding guesscost to distTo before compari
  *  Are there any known bugs / limitations?
  *****************************************************************************/
 
-Not that we know of. It runs on Java 11 and 13.
+Not that we know of. It runs on Java 11 and 13. It cant find path for astar NPuzzle 3 "/HGF/BED/C_A/" "/ABC/DEF/GH_/"
+and same for dijkstra. We spoke to some other groups and sometimes it works sometimes it doesnt with the same code.
 
 
 /******************************************************************************
