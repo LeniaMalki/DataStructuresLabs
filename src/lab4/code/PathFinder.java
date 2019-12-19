@@ -123,12 +123,9 @@ public class PathFinder<V> {
             if (!visited.contains(currentV)) {
                 visited.add(currentV);
                 if (currentV.toString().compareTo(goal.toString()) == 0) {
-
-                    V term = goal;
-
-                    while (term != start) {
-                        bestPath.add(term);
-                        term = edgeTo.get(term).from();
+                    while (goal != start) {
+                        bestPath.add(goal);
+                        goal = edgeTo.get(goal).from();
                     }
                     bestPath.add(start);
                     Collections.reverse(bestPath);
