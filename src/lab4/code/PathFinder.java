@@ -189,7 +189,7 @@ public class PathFinder<V> {
 
                     distTo.put(w, newDist);
                     edgeTo.put(w, edge);
-                        pq.add(w);
+//                    pq.add(new V(distTo.get(w)+graph.guessCost(w, w))); TODO something like this
 
                     //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
