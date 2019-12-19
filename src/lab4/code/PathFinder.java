@@ -110,7 +110,6 @@ public class PathFinder<V> {
 
             if (!visited.contains(currentV)) {
                 visited.add(currentV);
-                //System.out.println(v.toString() + " "+goal.toString());
                 if (currentV.toString().compareTo(goal.toString()) == 0) {
 
                     V term = goal;
@@ -136,8 +135,6 @@ public class PathFinder<V> {
                     distTo.put(w, newDist);
                     edgeTo.put(w, edge);
                     pq.add(w);
-
-                    //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
             }
         }
@@ -164,7 +161,6 @@ public class PathFinder<V> {
 
             if (!visited.contains(currentV)) {
                 visited.add(currentV);
-                //System.out.println(v.toString() + " "+goal.toString());
                 if (currentV.toString().compareTo(goal.toString()) == 0) {
 
                     V term = goal;
@@ -190,8 +186,6 @@ public class PathFinder<V> {
                     distTo.put(w, newDist);
                     edgeTo.put(w, edge);
                     pq.add(w);
-
-                    //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
             }
         }
