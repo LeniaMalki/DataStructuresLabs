@@ -130,7 +130,7 @@ public class PathFinder<V> {
                     V w = edge.to();
                     double newDist = distTo.get(currentV) + edge.weight();
                     if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
-                      continue;
+                        continue;
                     }
 
                     distTo.put(w, newDist);
@@ -147,54 +147,54 @@ public class PathFinder<V> {
 
     public Result<V> searchAstar(V start, V goal) {
         int visitedNodes = 0;
-        HashMap edgeTo = new HashMap<V, V>();
-        HashMap distTo = new HashMap<V, Integer>();
-        PriorityQueue<V> pq = new PriorityQueue<>();
+        HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
+        HashMap<V, Double> distTo = new HashMap<>();
+
+        Comparator<V> comparator = Comparator.comparing(distTo::get);
+        Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
-        Set visited = new HashSet();
+        Set<V> visited = new HashSet<>();
 
         pq.add(start);
         distTo.put(start, 0.0);
 
         while (!pq.isEmpty()) {
-            V v = pq.poll();
+            V currentV = pq.poll();
             visitedNodes++;
 
-            if (!visited.contains(v)) {
-                visited.add(v);
+            if (!visited.contains(currentV)) {
+                visited.add(currentV);
                 //System.out.println(v.toString() + " "+goal.toString());
-                if (v.toString().compareTo(goal.toString()) == 0) {
-                    // TODO calculate path and cost and return them
-                    Iterator iterableList = edgeTo.entrySet().iterator();
-                    while (iterableList.hasNext()) {
-                        V dEdge = (V) iterableList.next();
-                        if (dEdge.toString().compareTo(v.toString()) == 0) {
-                            bestPath.add(dEdge);
-                        }
+                if (currentV.toString().compareTo(goal.toString()) == 0) {
+
+                    V term = goal;
+
+                    while (term != start) {
+                        bestPath.add(term);
+                        term = edgeTo.get(term).from();
                     }
-                    Double cost = (Double) distTo.get(v);
+                    bestPath.add(start);
+                    Collections.reverse(bestPath);
+
+                    Double cost = distTo.get(currentV);
 
                     return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
                 }
-                for (DirectedEdge edge : graph.outgoingEdges(v)) {
-                    V w = (V) edge.to();
-                    double newDist = (double) distTo.get(v) + edge.weight();
-                    if (distTo.containsKey(w)) {
-                        if ((double) distTo.get(w) > newDist) {
-                            distTo.put(w, newDist);
-                            edgeTo.put(w, edge);
-                            pq.add(w);
-                        }
-                    } else {
-                        distTo.put(w, newDist);
-                        edgeTo.put(w, edge);
-                        pq.add(w);
+                for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
+                    V w = edge.to();
+                    double newDist = distTo.get(currentV) + edge.weight();
+                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
+                        continue;
                     }
+
+                    distTo.put(w, newDist);
+                    edgeTo.put(w, edge);
+                        pq.add(w);
+
                     //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
             }
         }
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
-
 }
