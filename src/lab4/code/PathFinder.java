@@ -123,16 +123,20 @@ public class PathFinder<V> {
             if (!visited.contains(currentV)) {
                 visited.add(currentV);
                 if (currentV.toString().compareTo(goal.toString()) == 0) {
-                    while (goal != start) {
-                        bestPath.add(goal);
-                        goal = edgeTo.get(goal).from();
+
+
+                    while (!currentV.equals(start)) {
+                        bestPath.add(currentV);
+                        currentV = edgeTo.get(currentV).from();
                     }
+
+
                     bestPath.add(start);
                     Collections.reverse(bestPath);
 
-                    Double cost = distTo.get(currentV);
+                    Double cost = distTo.get(goal);
 
-                    return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
+                    return new Result<>(true, start, currentV, cost, bestPath, visitedNodes);
                 }
                 for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
                     V w = edge.to();
