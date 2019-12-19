@@ -34,15 +34,18 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
     //   space  passable
     // Note: "-" must come last in allowedChars, because it's a regular expression
 
-    private static String allowedChars = ".G@OTSW +|-"; 
+    private static String allowedChars = ".G@OTSW +|-";
     private static String passableChars = ".G ";
 
 
     public static class Coord {
         public final int x, y;
+
         public Coord(int x, int y) {
-            this.x = x; this.y = y;
+            this.x = x;
+            this.y = y;
         }
+
         @Override
         public boolean equals(Object o) {
             if (o == this) return true;
@@ -50,9 +53,11 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
             Coord other = (Coord) o;
             return this.x == other.x && this.y == other.y;
         }
+
         public int hashCode() {
             return (this.x << 8) ^ this.y;
         }
+
         public String toString() {
             return x + ":" + y;
         }
@@ -84,12 +89,12 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
 
     public List<DirectedEdge<Coord>> outgoingEdges(Coord p) {
         List<DirectedEdge<Coord>> outgoing = new LinkedList<>();
-        for (int dx = -1; dx <= +1; dx++) 
-            for (int dy = -1; dy <= +1; dy++) 
-                if (!(dx == 0 && dy == 0)) 
-                    if (passable(p.x+dx, p.y+dy)) {
-                        Coord q = new Coord(p.x+dx, p.y+dy);
-                        double w = Math.sqrt(dx*dx + dy*dy);
+        for (int dx = -1; dx <= +1; dx++)
+            for (int dy = -1; dy <= +1; dy++)
+                if (!(dx == 0 && dy == 0))
+                    if (passable(p.x + dx, p.y + dy)) {
+                        Coord q = new Coord(p.x + dx, p.y + dy);
+                        double w = Math.sqrt(dx * dx + dy * dy);
                         outgoing.add(new DirectedEdge<>(p, q, w));
                     }
         return outgoing;
@@ -97,15 +102,12 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
 
 
     public boolean passable(int x, int y) {
-        return x >= 0 && y >= 0 && x < width-1 && y < height-1 && passableChars.indexOf(grid[y][x]) >= 0;
+        return x >= 0 && y >= 0 && x < width - 1 && y < height - 1 && passableChars.indexOf(grid[y][x]) >= 0;
     }
 
 
     public double guessCost(Coord start, Coord end) {
-        /********************
-         * TODO: Task 4
-         ********************/
-        return 0;
+        return Math.sqrt(Math.pow((start.x - end.x), 2) + Math.pow((start.y - end.y), 2));
     }
 
 
@@ -119,7 +121,7 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
         s.append("Bitmap graph of dimesions " + width + " x " + height + " pixels\n");
         int ctr = 0;
         for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) 
+            for (int x = 0; x < width; x++)
                 s.append(path.contains(new Coord(x, y)) ? "*" : grid[y][x]);
             s.append("\n");
         }
@@ -135,14 +137,14 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
         for (int i = 0; i < 10; i++) {
             int x, y;
             do {
-                x = random.nextInt(width-2) + 1;
-                y = random.nextInt(height-2) + 1;
+                x = random.nextInt(width - 2) + 1;
+                y = random.nextInt(height - 2) + 1;
             } while (!passable(x, y));
             Coord p = new Coord(x, y);
             List<DirectedEdge<Coord>> edges = outgoingEdges(p);
             s.append(p.x + ":" + p.y + " --> " + edges.stream()
-                     .map(e -> e.to().x + ":"+ e.to().y + "[" + e.weight() + "]")
-                     .collect(Collectors.joining(", ")) + "\n");
+                .map(e -> e.to().x + ":" + e.to().y + "[" + e.weight() + "]")
+                .collect(Collectors.joining(", ")) + "\n");
         }
         return s.toString();
     }
@@ -150,7 +152,8 @@ public class GridGraph implements DirectedGraph<GridGraph.Coord> {
 
     /**
      * Unit tests the class
-     * @param args  the command-line arguments
+     *
+     * @param args the command-line arguments
      */
     public static void main(String[] args) {
         try {
