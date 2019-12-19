@@ -150,7 +150,10 @@ public class PathFinder<V> {
         HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
         HashMap<V, Double> distTo = new HashMap<>();
 
-        Comparator<V> comparator = Comparator.comparing(distTo::get);
+        Comparator<V> comparator = (o1, o2) -> Double.compare(
+            distTo.get(o1) + graph.guessCost(o1, goal),
+            distTo.get(o2) + graph.guessCost(o2, goal)
+        );
         Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
         Set<V> visited = new HashSet<>();
@@ -189,7 +192,7 @@ public class PathFinder<V> {
 
                     distTo.put(w, newDist);
                     edgeTo.put(w, edge);
-//                    pq.add(new V(distTo.get(w)+graph.guessCost(w, w))); TODO something like this
+                    pq.add(w);
 
                     //System.out.println(v.toString() + " lalla " + newDist + " edge: " + edge.toString() +"\n     " + " baloo is !bae " + distTo.toString());
                 }
