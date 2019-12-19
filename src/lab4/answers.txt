@@ -140,9 +140,9 @@ while queue is not empty:
     if v not in visited:
         add v to visited
         if v is the goal:
-            while goal is not start
-                add goal to bestPath
-                set goal to next edge from goal
+            while v is not start
+                add v to bestPath
+                set v to next edge from v
             add start to bestPath
             reverse bestPath
 
