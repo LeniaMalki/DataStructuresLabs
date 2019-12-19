@@ -27,8 +27,8 @@ public class WordLadder implements DirectedGraph<String> {
         dictionary = new HashSet<>();
         charset = new HashSet<>();
         Files.lines(Paths.get(file))
-                .filter(line -> !line.startsWith("#"))
-                .forEach(word -> addWord(word.trim()));
+            .filter(line -> !line.startsWith("#"))
+            .forEach(word -> addWord(word.trim()));
     }
 
 
@@ -68,31 +68,34 @@ public class WordLadder implements DirectedGraph<String> {
         String start;
         String end;
 
-        for (int i = 0; i < word.length();i++){
-             start = word.substring(0,i);
-             end = word.substring(i+1);
+        for (int i = 0; i < word.length(); i++) {
+            start = word.substring(0, i);
+            end = word.substring(i + 1);
 
-            for (char c:
-                 charset) {
+            for (char c :
+                charset) {
                 StringBuilder sb = new StringBuilder(start);
                 sb.append(c);
                 sb.append(end);
 
-                if (dictionary.contains(sb.toString())){
+                if (dictionary.contains(sb.toString())) {
                     outgoingEdges.add(new DirectedEdge<>(word, sb.toString()));
                 }
             }
         }
-        
+
         return outgoingEdges;
     }
 
 
     public double guessCost(String v, String w) {
-        /********************
-         * TODO: Task 4
-         ********************/
-        return 0;
+        int count = 0;
+        for (int i = 0; i < v.length(); i++) {
+            if (v.charAt(i) != w.charAt(i)) {
+                count++;
+            }
+        }
+        return count;
     }
 
 
@@ -102,7 +105,7 @@ public class WordLadder implements DirectedGraph<String> {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Word ladder with " + nrNodes() + " words, " +
-                "charset: \"" + charset.stream().map(x -> x.toString()).collect(Collectors.joining()) + "\"\n\n");
+            "charset: \"" + charset.stream().map(x -> x.toString()).collect(Collectors.joining()) + "\"\n\n");
         int ctr = 0;
         s.append("Example words and ladder steps:\n");
         for (String v : dictionary) {
