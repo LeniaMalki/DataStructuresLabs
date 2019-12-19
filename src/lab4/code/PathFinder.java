@@ -93,13 +93,13 @@ public class PathFinder<V> {
 
     public Result<V> searchDijkstra(V start, V goal) {
         int visitedNodes = 0;
-        HashMap<V, DirectedEdge<V>> edgeTo = new HashMap();
-        HashMap<V, Double> distTo = new HashMap();
+        HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
+        HashMap<V, Double> distTo = new HashMap<>();
 
         Comparator<V> comparator = Comparator.comparing(distTo::get);
         Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
-        Set visited = new HashSet();
+        Set<V> visited = new HashSet<>();
 
         pq.add(start);
         distTo.put(start, 0.0);
@@ -117,7 +117,7 @@ public class PathFinder<V> {
 
                     while (term != start) {
                         bestPath.add(term);
-                        term = (V) edgeTo.get((V) term).from();
+                        term = edgeTo.get(term).from();
                     }
                     bestPath.add(start);
                     Collections.reverse(bestPath);
@@ -129,7 +129,9 @@ public class PathFinder<V> {
                 for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
                     V w = edge.to();
                     double newDist = distTo.get(currentV) + edge.weight();
-                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) continue;
+                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
+                      continue;
+                    }
 
                     distTo.put(w, newDist);
                     edgeTo.put(w, edge);
