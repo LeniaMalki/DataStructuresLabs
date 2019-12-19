@@ -150,10 +150,7 @@ public class PathFinder<V> {
         HashMap<V, DirectedEdge<V>> edgeTo = new HashMap<>();
         HashMap<V, Double> distTo = new HashMap<>();
 
-        Comparator<V> comparator = (o1, o2) -> Double.compare(
-            distTo.get(o1) + graph.guessCost(o1, goal),
-            distTo.get(o2) + graph.guessCost(o2, goal)
-        );
+        Comparator<V> comparator = Comparator.comparingDouble(o -> distTo.get(o) + graph.guessCost(o, goal));
         Queue<V> pq = new PriorityQueue<>(comparator);
         List<V> bestPath = new ArrayList<>();
         Set<V> visited = new HashSet<>();
