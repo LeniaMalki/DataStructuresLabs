@@ -24,6 +24,9 @@ public class RangeBinarySearch {
                 high = mid-1;
             }
         }
+        if(lo>=a.length) {
+            return a.length;
+        }
         if (comparator.compare(key, a[lo]) == 0) {
             return lo;
         }
