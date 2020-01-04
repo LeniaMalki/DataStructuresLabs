@@ -48,7 +48,8 @@ public class Autocomplete {
 
         int firstIndex = RangeBinarySearch.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         int lastIndex  = RangeBinarySearch.lastIndexOf (this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-        return lastIndex-firstIndex;
+        if (lastIndex < 0 || firstIndex < 0) return 0;
+        return lastIndex-firstIndex + 1;
     }
 
     //Performance requirements
