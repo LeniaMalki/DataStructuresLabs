@@ -41,10 +41,10 @@ public class NPuzzle implements DirectedGraph<String> {
             if (newpos > 0 && newpos < v.length() && v.charAt(newpos) != separator) {
                 if (pos < newpos)
                     w = v.substring(0, pos) + v.charAt(newpos) + v.substring(pos + 1, newpos) +
-                        emptytile + v.substring(newpos + 1);
+                            emptytile + v.substring(newpos + 1);
                 else
                     w = v.substring(0, newpos) + emptytile + v.substring(newpos + 1, pos) +
-                        v.charAt(newpos) + v.substring(pos + 1);
+                            v.charAt(newpos) + v.substring(pos + 1);
                 outgoing.add(new DirectedEdge<>(v, w));
             }
         }
@@ -70,6 +70,7 @@ public class NPuzzle implements DirectedGraph<String> {
 
     private String makeState(String mytiles) {
         StringBuilder s = new StringBuilder();
+        System.out.println(mytiles);
         for (int i = 0; i < N; i++)
             s.append(separator + mytiles.substring(N * i, N * (i + 1)));
         s.append(separator);

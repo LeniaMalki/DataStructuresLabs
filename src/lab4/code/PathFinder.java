@@ -115,41 +115,47 @@ public class PathFinder<V> {
 
         pq.add(start);
         distTo.put(start, 0.0);
-
         while (!pq.isEmpty()) {
             V currentV = pq.poll();
+
+            if (visited.contains(currentV)) continue;
+
             visitedNodes++;
-
-            if (!visited.contains(currentV)) {
-                visited.add(currentV);
-                if (currentV.toString().compareTo(goal.toString()) == 0) {
-
-
-                    while (!currentV.equals(start)) {
-                        bestPath.add(currentV);
-                        currentV = edgeTo.get(currentV).from();
-                    }
+            visited.add(currentV);
+            if (currentV.toString().compareTo(goal.toString()) == 0) {
+                System.out.println("Yalla");
 
 
-                    bestPath.add(start);
-                    Collections.reverse(bestPath);
-
-                    Double cost = distTo.get(goal);
-
-                    return new Result<>(true, start, currentV, cost, bestPath, visitedNodes);
+                while (!currentV.equals(start)) {
+                    bestPath.add(currentV);
+                    currentV = edgeTo.get(currentV).from();
                 }
-                for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
-                    V w = edge.to();
-                    double newDist = distTo.get(currentV) + edge.weight();
-                    if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
-                        continue;
-                    }
 
-                    distTo.put(w, newDist);
-                    edgeTo.put(w, edge);
-                    pq.add(w);
-                }
+
+                bestPath.add(start);
+                Collections.reverse(bestPath);
+
+                Double cost = distTo.get(goal);
+
+                return new Result<>(true, start, goal, cost, bestPath, visitedNodes);
             }
+
+            for (DirectedEdge<V> edge : graph.outgoingEdges(currentV)) {
+                V w = edge.to();
+                double newDist = distTo.get(currentV) + edge.weight();
+                if (distTo.containsKey(w) && !(distTo.get(w) > newDist)) {
+                    continue;
+                }
+                distTo.put(w, newDist);
+                edgeTo.put(w, edge);
+                pq.add(w);
+            }
+
+        }
+        for (V v:
+             visited) {
+            if (v.toString().substring(0, 8).equals("/ABC/DEF"))
+            System.out.println("visited= " + v.toString() + " Goal: " + goal.toString());
         }
         return new Result<>(false, start, null, -1, null, visitedNodes);
     }
