@@ -55,6 +55,12 @@ public class RangeBinarySearch {
                 lo = mid+1;
             }
         }
+        if(lo<=0) {
+            return 0;
+        } else if (high >= a.length-1){
+            return a.length-1;
+        }
+
         if (comparator.compare(key, a[high]) == 0) {
             return high;
         }
