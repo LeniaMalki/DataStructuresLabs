@@ -28,7 +28,6 @@ public class Autocomplete {
         }
 
         int lastIndex  = RangeBinarySearch.lastIndexOf (this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-        System.out.println(firstIndex + "  " + lastIndex);
         Term[] terms = new Term[lastIndex - firstIndex + 1];
 
         for (int i = 0; i < terms.length; i++) {
